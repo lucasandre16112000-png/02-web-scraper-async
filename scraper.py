@@ -250,10 +250,14 @@ async def main():
     print(f"Status: {stats['status'].value}")
     
     # Salvar resultados em JSON
+    # Converter stats para dicionário e serializar o status
+    stats_dict = dict(stats)
+    stats_dict['status'] = stats_dict['status'].value
+    
     output = {
         "timestamp": datetime.utcnow().isoformat(),
         "articles": [asdict(a) for a in articles],
-        "statistics": stats
+        "statistics": stats_dict
     }
     
     with open("scraping_results.json", "w", encoding="utf-8") as f:
