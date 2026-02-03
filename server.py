@@ -126,7 +126,7 @@ def run_scraper():
         asyncio.set_event_loop(loop)
         
         try:
-            loop.run_until_complete(scraper.scrape(urls))
+            loop.run_until_complete(scraper.scrape_articles(urls))
         finally:
             loop.close()
         
