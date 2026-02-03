@@ -1,13 +1,21 @@
 """
 Exemplo de uso do Web Scraper com URLs customizadas
 Execute este arquivo para testar o scraper com diferentes URLs
+Totalmente compatível com Windows, macOS e Linux
 """
 
 import asyncio
-from scraper import WebScraper
+import sys
+import platform
+from pathlib import Path
+from scraper import WebScraper, URLValidator
 import json
 from datetime import datetime
 from dataclasses import asdict
+
+# Configuração de asyncio para Windows
+if platform.system() == "Windows":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 async def main():
@@ -22,7 +30,22 @@ async def main():
     
     print("=" * 80)
     print("WEB SCRAPER ASSÍNCRONO - EXEMPLO CUSTOMIZÁVEL")
+    print(f"Sistema Operacional: {platform.system()}")
     print("=" * 80)
+    
+    # Validar URLs
+    print("\n🔍 Validando URLs...")
+    valid_count = 0
+    for url in urls:
+        if URLValidator.is_valid_url(url):
+            print(f"   ✓ {url}")
+            valid_count += 1
+        else:
+            print(f"   ✗ {url} (inválida)")
+    
+    if valid_count == 0:
+        print("\n❌ Nenhuma URL válida fornecida!")
+        sys.exit(1)
     
     # Configurar o scraper com seus próprios parâmetros
     scraper = WebScraper(
@@ -31,7 +54,7 @@ async def main():
         max_retries=3              # Máximo de 3 tentativas por URL
     )
     
-    print(f"\n📊 Iniciando scraping de {len(urls)} URLs...")
+    print(f"\n📊 Iniciando scraping de {valid_count} URLs...")
     print(f"⏱️  Rate limit: 2 requisições/segundo")
     print(f"🔄 Máximo de tentativas: 3")
     print(f"⏳ Timeout: 10 segundos\n")
@@ -68,22 +91,21 @@ async def main():
     print(f"Status: {stats['status'].value}")
     
     # Salvar resultados em JSON
-    # Converter stats para dicionário e serializar o status
-    stats_dict = dict(stats)
-    stats_dict['status'] = stats_dict['status'].value
-    
-    output = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "articles": [asdict(a) for a in articles],
-        "statistics": stats_dict
-    }
-    
-    with open("scraping_results.json", "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
-    
-    print(f"\n✅ Resultados salvos em 'scraping_results.json'")
-    print("\n💡 Dica: Abra o arquivo 'scraping_results.json' para ver os dados em formato JSON")
+    try:
+        output_path = scraper.save_results(articles)
+        print(f"\n✅ Resultados salvos em '{output_path}'")
+        print("\n💡 Dica: Abra o arquivo 'scraping_results.json' para ver os dados em formato JSON")
+    except Exception as e:
+        print(f"\n❌ Erro ao salvar resultados: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\n\n⚠️  Scraping interrompido pelo usuário")
+        sys.exit(0)
+    except Exception as e:
+        print(f"\n❌ Erro: {e}")
+        sys.exit(1)

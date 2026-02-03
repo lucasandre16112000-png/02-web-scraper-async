@@ -2,6 +2,7 @@
 venv/
 env/
 ENV/
+.venv/
 
 # Arquivos de resultado do scraping
 scraping_results.json
@@ -13,19 +14,52 @@ __pycache__/
 *$py.class
 *.so
 
+# Distribuição / empacotamento
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
 # Arquivos de IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
 
 # Arquivos de sistema
 .DS_Store
 Thumbs.db
+.AppleDouble
+.LSOverride
 
 # Arquivos de log
 *.log
+logs/
 
 # Variáveis de ambiente
 .env
 .env.local
+.env.*.local
+
+# Diretório de testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Diretório temporário
+temp/
+tmp/

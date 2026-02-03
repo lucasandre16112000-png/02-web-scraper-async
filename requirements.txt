@@ -1,3 +1,15 @@
+# Web Scraper Async - Dependências
+# Compatível com Windows, macOS e Linux
+# Python 3.8+
+
+# Cliente HTTP assíncrono
 aiohttp==3.9.1
+
+# Parsing de HTML/XML
 beautifulsoup4==4.12.2
+
+# Parser XML/HTML de alta performance
 lxml==4.9.3
+
+# Variáveis de ambiente (opcional)
+python-dotenv==1.0.0

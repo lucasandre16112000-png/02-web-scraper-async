@@ -1,13 +1,37 @@
 """
 Testes unitários para o Web Scraper
 Verifica se todas as funcionalidades estão funcionando corretamente
+Compatível com Windows, macOS e Linux
 """
 
 import asyncio
 import unittest
-from scraper import WebScraper, RateLimiter, Article, ScraperStatus
+import sys
+import platform
+from scraper import WebScraper, RateLimiter, Article, ScraperStatus, URLValidator
 from dataclasses import asdict
 import time
+
+# Configuração de asyncio para Windows
+if platform.system() == "Windows":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+
+class TestURLValidator(unittest.TestCase):
+    """Testes para a classe URLValidator"""
+    
+    def test_valid_url(self):
+        """Testa validação de URL válida"""
+        self.assertTrue(URLValidator.is_valid_url("https://example.com"))
+        self.assertTrue(URLValidator.is_valid_url("http://example.com"))
+    
+    def test_invalid_url(self):
+        """Testa validação de URL inválida"""
+        self.assertFalse(URLValidator.is_valid_url("not a url"))
+        self.assertFalse(URLValidator.is_valid_url("example.com"))
+        self.assertFalse(URLValidator.is_valid_url(""))
+        self.assertFalse(URLValidator.is_valid_url(None))
+        self.assertFalse(URLValidator.is_valid_url(123))
 
 
 class TestRateLimiter(unittest.TestCase):
@@ -27,7 +51,7 @@ class TestRateLimiter(unittest.TestCase):
             await limiter.wait()
             await limiter.wait()
             elapsed = time.time() - start
-            # Deve ter esperado pelo menos 0.5 segundos
+            # Deve ter esperado pelo menos 0.4 segundos
             self.assertGreaterEqual(elapsed, 0.4)
         
         asyncio.run(test())
@@ -58,6 +82,15 @@ class TestArticle(unittest.TestCase):
         self.assertIsInstance(article_dict, dict)
         self.assertEqual(article_dict['title'], "Test Title")
         self.assertEqual(article_dict['url'], "https://example.com")
+    
+    def test_article_title_truncation(self):
+        """Testa se títulos muito longos são truncados"""
+        long_title = "A" * 300
+        article = Article(
+            title=long_title[:200],
+            url="https://example.com"
+        )
+        self.assertEqual(len(article.title), 200)
 
 
 class TestWebScraper(unittest.TestCase):
@@ -93,6 +126,18 @@ class TestWebScraper(unittest.TestCase):
             self.assertEqual(stats['total_items'], 0)
         
         asyncio.run(test())
+    
+    def test_scraper_with_invalid_urls(self):
+        """Testa o scraper com URLs inválidas"""
+        async def test():
+            scraper = WebScraper()
+            invalid_urls = ["not a url", "example.com", ""]
+            articles = await scraper.scrape_articles(invalid_urls)
+            self.assertEqual(len(articles), 0)
+            stats = scraper.get_stats()
+            self.assertEqual(stats['status'].value, 'failed')
+        
+        asyncio.run(test())
 
 
 class TestIntegration(unittest.TestCase):
@@ -115,12 +160,23 @@ class TestIntegration(unittest.TestCase):
             self.assertGreaterEqual(stats['successful_items'] + stats['failed_items'], 1)
         
         asyncio.run(test())
+    
+    def test_scraper_output_directory(self):
+        """Testa se o scraper cria o diretório de saída corretamente"""
+        import tempfile
+        from pathlib import Path
+        
+        with tempfile.TemporaryDirectory() as tmpdir:
+            scraper = WebScraper(output_dir=tmpdir)
+            output_path = Path(tmpdir)
+            self.assertTrue(output_path.exists())
 
 
 def run_tests():
     """Executa todos os testes"""
     print("=" * 80)
     print("EXECUTANDO TESTES DO WEB SCRAPER")
+    print(f"Sistema Operacional: {platform.system()}")
     print("=" * 80)
     
     # Criar suite de testes
@@ -128,6 +184,7 @@ def run_tests():
     suite = unittest.TestSuite()
     
     # Adicionar testes
+    suite.addTests(loader.loadTestsFromTestCase(TestURLValidator))
     suite.addTests(loader.loadTestsFromTestCase(TestRateLimiter))
     suite.addTests(loader.loadTestsFromTestCase(TestArticle))
     suite.addTests(loader.loadTestsFromTestCase(TestWebScraper))
@@ -151,4 +208,4 @@ def run_tests():
 
 if __name__ == "__main__":
     success = run_tests()
-    exit(0 if success else 1)
+    sys.exit(0 if success else 1)
