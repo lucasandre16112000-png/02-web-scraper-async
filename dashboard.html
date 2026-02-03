@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Web Scraper</title>
+    <title>Web Scraper - Portfólio Profissional</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -20,28 +20,124 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
         .header {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             text-align: center;
         }
 
         .header h1 {
             color: #667eea;
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header p {
             color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .info-badge {
+            background: #f0f4ff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .status-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .status-title {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .status-message {
+            color: #666;
             font-size: 1.1em;
+            margin-bottom: 20px;
+            min-height: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .stats-grid {
@@ -53,19 +149,32 @@
 
         .stat-card {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            border-top: 4px solid #667eea;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .stat-card .label {
+        .stat-card.success {
+            border-top-color: #10b981;
+        }
+
+        .stat-card.error {
+            border-top-color: #ef4444;
+        }
+
+        .stat-card.info {
+            border-top-color: #3b82f6;
+        }
+
+        .stat-label {
             color: #999;
             font-size: 0.9em;
             text-transform: uppercase;
@@ -73,21 +182,21 @@
             margin-bottom: 10px;
         }
 
-        .stat-card .value {
+        .stat-value {
             font-size: 2.5em;
             font-weight: bold;
             color: #667eea;
         }
 
-        .stat-card.success .value {
+        .stat-card.success .stat-value {
             color: #10b981;
         }
 
-        .stat-card.error .value {
+        .stat-card.error .stat-value {
             color: #ef4444;
         }
 
-        .stat-card.info .value {
+        .stat-card.info .stat-value {
             color: #3b82f6;
         }
 
@@ -100,9 +209,9 @@
 
         .chart-container {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .chart-container h3 {
@@ -113,29 +222,30 @@
 
         .articles-section {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .articles-section h2 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 1.5em;
         }
 
         .article-card {
-            border-left: 4px solid #667eea;
+            border-left: 5px solid #667eea;
             padding: 20px;
             margin-bottom: 15px;
             background: #f9fafb;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
 
         .article-card:hover {
             background: #f3f4f6;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
         }
 
         .article-card.failed {
@@ -143,15 +253,11 @@
             background: #fef2f2;
         }
 
-        .article-card.failed:hover {
-            background: #fee2e2;
-        }
-
         .article-title {
             font-size: 1.1em;
             font-weight: bold;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             word-break: break-word;
         }
 
@@ -159,13 +265,15 @@
             color: #667eea;
             text-decoration: none;
             font-size: 0.9em;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: inline-block;
             word-break: break-all;
+            transition: all 0.3s ease;
         }
 
         .article-url:hover {
             text-decoration: underline;
+            color: #764ba2;
         }
 
         .article-meta {
@@ -192,15 +300,6 @@
             color: #666;
             font-size: 0.9em;
             line-height: 1.5;
-        }
-
-        .timestamp {
-            text-align: center;
-            color: #999;
-            font-size: 0.9em;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
         }
 
         .status-badge {
@@ -233,49 +332,66 @@
             margin-bottom: 10px;
         }
 
-        .load-file-section {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .load-file-section input {
-            padding: 10px 20px;
-            border: 2px solid #667eea;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .load-file-section label {
+        .loading-spinner {
             display: inline-block;
-            margin-right: 10px;
-            color: #333;
-            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .timestamp {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
 
             .charts-grid {
                 grid-template-columns: 1fr;
             }
 
-            .stat-card .value {
+            .stat-value {
                 font-size: 2em;
             }
+
+            .header-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .hidden {
+            display: none !important;
         }
 
         .error-message {
             background: #fee2e2;
             color: #991b1b;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 20px;
             border-left: 4px solid #ef4444;
         }
@@ -284,46 +400,59 @@
             background: #d1fae5;
             color: #065f46;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 20px;
             border-left: 4px solid #10b981;
+        }
+
+        .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🕷️ Dashboard Web Scraper</h1>
-            <p>Visualize os dados coletados em tempo real</p>
+            <div class="icon">🕷️</div>
+            <h1>Web Scraper Profissional</h1>
+            <p>Coleta automática de dados de múltiplos websites</p>
+            <div class="header-info">
+                <div class="info-badge">⚡ Processamento Assíncrono</div>
+                <div class="info-badge">📊 Análise em Tempo Real</div>
+                <div class="info-badge">🎨 Interface Responsiva</div>
+            </div>
         </div>
 
-        <div class="load-file-section">
-            <label for="fileInput">Carregar arquivo scraping_results.json:</label>
-            <input type="file" id="fileInput" accept=".json" onchange="loadFile(event)">
-            <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
-                📁 Procure pelo arquivo na pasta do projeto: <code>scraping_results.json</code>
-            </p>
+        <div class="status-container">
+            <div class="status-title">Status do Scraper</div>
+            <div class="status-message" id="statusMessage">Inicializando...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+            <div class="button-container">
+                <button class="btn" id="startBtn" onclick="startScraping()">🚀 Iniciar Scraping</button>
+            </div>
         </div>
 
-        <div id="messageContainer"></div>
-
-        <div id="content" style="display: none;">
+        <div id="contentArea" class="hidden">
             <div class="stats-grid">
                 <div class="stat-card success">
-                    <div class="label">✅ Sucessos</div>
-                    <div class="value" id="successCount">0</div>
+                    <div class="stat-label">✅ Sucessos</div>
+                    <div class="stat-value" id="successCount">0</div>
                 </div>
                 <div class="stat-card error">
-                    <div class="label">❌ Falhas</div>
-                    <div class="value" id="failureCount">0</div>
+                    <div class="stat-label">❌ Falhas</div>
+                    <div class="stat-value" id="failureCount">0</div>
                 </div>
                 <div class="stat-card info">
-                    <div class="label">⏱️ Tempo Total</div>
-                    <div class="value" id="totalTime">0s</div>
+                    <div class="stat-label">⏱️ Tempo Total</div>
+                    <div class="stat-value" id="totalTime">0s</div>
                 </div>
                 <div class="stat-card">
-                    <div class="label">📊 Taxa Média</div>
-                    <div class="value" id="averageRate">0</div>
+                    <div class="stat-label">📊 Taxa Média</div>
+                    <div class="stat-value" id="averageRate">0</div>
                 </div>
             </div>
 
@@ -349,144 +478,160 @@
         </div>
     </div>
 
+    <div class="footer">
+        <p>💼 Portfólio Profissional | Web Scraper Assíncrono | 2026</p>
+    </div>
+
     <script>
         let successChart, timeChart;
+        let isScraperRunning = false;
 
-        function loadFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    displayDashboard(data);
-                    showMessage('✅ Arquivo carregado com sucesso!', 'success');
-                } catch (error) {
-                    showMessage('❌ Erro ao carregar o arquivo. Certifique-se de que é um JSON válido.', 'error');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function showMessage(message, type) {
-            const container = document.getElementById('messageContainer');
-            const className = type === 'success' ? 'success-message' : 'error-message';
-            container.innerHTML = `<div class="${className}">${message}</div>`;
-            setTimeout(() => {
-                container.innerHTML = '';
-            }, 5000);
-        }
-
-        function displayDashboard(data) {
-            const stats = data.statistics;
-            const articles = data.articles;
-
-            // Atualizar estatísticas
-            document.getElementById('successCount').textContent = stats.successful_items;
-            document.getElementById('failureCount').textContent = stats.failed_items;
-            document.getElementById('totalTime').textContent = stats.total_time.toFixed(2) + 's';
-            document.getElementById('averageRate').textContent = stats.items_per_second.toFixed(2) + '/s';
-            document.getElementById('timestampDisplay').textContent = new Date(data.timestamp).toLocaleString('pt-BR');
-
-            // Gráfico de sucesso
-            const ctx1 = document.getElementById('successChart').getContext('2d');
-            if (successChart) successChart.destroy();
-            successChart = new Chart(ctx1, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Sucessos', 'Falhas'],
-                    datasets: [{
-                        data: [stats.successful_items, stats.failed_items],
-                        backgroundColor: ['#10b981', '#ef4444'],
-                        borderColor: ['#059669', '#dc2626'],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-
-            // Gráfico de tempo
-            const ctx2 = document.getElementById('timeChart').getContext('2d');
-            if (timeChart) timeChart.destroy();
-            timeChart = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: ['Tempo Total (s)'],
-                    datasets: [{
-                        label: 'Tempo (segundos)',
-                        data: [stats.total_time],
-                        backgroundColor: '#667eea',
-                        borderColor: '#5568d3',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: {
-                            display: true
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // Exibir artigos
-            const articlesContainer = document.getElementById('articlesContainer');
-            if (articles.length === 0) {
-                articlesContainer.innerHTML = '<div class="no-data"><p>Nenhum artigo foi extraído com sucesso.</p></div>';
-            } else {
-                articlesContainer.innerHTML = articles.map((article, index) => `
-                    <div class="article-card ${article.title === 'N/A' ? 'failed' : ''}">
-                        <div class="article-title">${index + 1}. ${article.title}</div>
-                        <a href="${article.url}" target="_blank" class="article-url">${article.url}</a>
-                        <div class="article-meta">
-                            <div class="article-meta-item">
-                                <span class="article-meta-label">Autor:</span> ${article.author || 'N/A'}
-                            </div>
-                            <div class="article-meta-item">
-                                <span class="article-meta-label">Data:</span> ${article.published_date || 'N/A'}
-                            </div>
-                        </div>
-                        ${article.summary ? `<div class="article-summary"><strong>Resumo:</strong> ${article.summary}</div>` : ''}
-                        <div class="article-meta">
-                            <div class="article-meta-item">
-                                <span class="article-meta-label">Coletado em:</span> ${new Date(article.scraped_at).toLocaleString('pt-BR')}
-                            </div>
-                        </div>
-                        <span class="status-badge ${article.title === 'N/A' ? 'failed' : 'success'}">
-                            ${article.title === 'N/A' ? '❌ Falhou' : '✅ Sucesso'}
-                        </span>
-                    </div>
-                `).join('');
-            }
-
-            // Mostrar conteúdo
-            document.getElementById('content').style.display = 'block';
-        }
-
-        // Tentar carregar automaticamente se o arquivo existir
+        // Carregar dados inicialmente
         window.addEventListener('load', function() {
-            const messageContainer = document.getElementById('messageContainer');
-            messageContainer.innerHTML = `
-                <div class="success-message">
-                    📁 Para visualizar os dados, clique em "Escolher arquivo" e selecione o arquivo <code>scraping_results.json</code> da pasta do projeto.
-                </div>
-            `;
+            loadData();
+            // Atualizar dados a cada 2 segundos
+            setInterval(loadData, 2000);
         });
+
+        function loadData() {
+            fetch('/api/scraping-data')
+                .then(response => response.json())
+                .then(data => {
+                    updateUI(data);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar dados:', error);
+                });
+        }
+
+        function updateUI(data) {
+            // Atualizar status
+            const statusMsg = document.getElementById('statusMessage');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const startBtn = document.getElementById('startBtn');
+            const contentArea = document.getElementById('contentArea');
+
+            statusMsg.textContent = data.message;
+            progressFill.style.width = data.progress + '%';
+            progressText.textContent = data.progress + '%';
+
+            // Habilitar/desabilitar botão
+            isScraperRunning = data.status === 'scraping';
+            startBtn.disabled = isScraperRunning;
+
+            // Mostrar conteúdo quando completado
+            if (data.status === 'completed' && data.articles.length > 0) {
+                contentArea.classList.remove('hidden');
+
+                // Atualizar estatísticas
+                document.getElementById('successCount').textContent = data.statistics.successful_items;
+                document.getElementById('failureCount').textContent = data.statistics.failed_items;
+                document.getElementById('totalTime').textContent = data.statistics.total_time.toFixed(2) + 's';
+                document.getElementById('averageRate').textContent = data.statistics.items_per_second.toFixed(2) + '/s';
+                document.getElementById('timestampDisplay').textContent = new Date(data.timestamp).toLocaleString('pt-BR');
+
+                // Gráfico de sucesso
+                const ctx1 = document.getElementById('successChart').getContext('2d');
+                if (successChart) successChart.destroy();
+                successChart = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Sucessos', 'Falhas'],
+                        datasets: [{
+                            data: [data.statistics.successful_items, data.statistics.failed_items],
+                            backgroundColor: ['#10b981', '#ef4444'],
+                            borderColor: ['#059669', '#dc2626'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+
+                // Gráfico de tempo
+                const ctx2 = document.getElementById('timeChart').getContext('2d');
+                if (timeChart) timeChart.destroy();
+                timeChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Tempo Total (s)'],
+                        datasets: [{
+                            label: 'Tempo (segundos)',
+                            data: [data.statistics.total_time],
+                            backgroundColor: '#667eea',
+                            borderColor: '#5568d3',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: {
+                                display: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Exibir artigos
+                const articlesContainer = document.getElementById('articlesContainer');
+                if (data.articles.length === 0) {
+                    articlesContainer.innerHTML = '<div class="no-data"><p>Nenhum artigo foi extraído com sucesso.</p></div>';
+                } else {
+                    articlesContainer.innerHTML = data.articles.map((article, index) => `
+                        <div class="article-card ${article.title === 'N/A' ? 'failed' : ''}">
+                            <div class="article-title">${index + 1}. ${article.title}</div>
+                            <a href="${article.url}" target="_blank" class="article-url">${article.url}</a>
+                            <div class="article-meta">
+                                <div class="article-meta-item">
+                                    <span class="article-meta-label">Autor:</span> ${article.author || 'N/A'}
+                                </div>
+                                <div class="article-meta-item">
+                                    <span class="article-meta-label">Data:</span> ${article.published_date || 'N/A'}
+                                </div>
+                            </div>
+                            ${article.summary ? `<div class="article-summary"><strong>Resumo:</strong> ${article.summary}</div>` : ''}
+                            <div class="article-meta">
+                                <div class="article-meta-item">
+                                    <span class="article-meta-label">Coletado em:</span> ${new Date(article.scraped_at).toLocaleString('pt-BR')}
+                                </div>
+                            </div>
+                            <span class="status-badge ${article.title === 'N/A' ? 'failed' : 'success'}">
+                                ${article.title === 'N/A' ? '❌ Falhou' : '✅ Sucesso'}
+                            </span>
+                        </div>
+                    `).join('');
+                }
+            }
+        }
+
+        function startScraping() {
+            const startBtn = document.getElementById('startBtn');
+            startBtn.disabled = true;
+
+            fetch('/api/start-scraping')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Scraping iniciado:', data);
+                })
+                .catch(error => {
+                    console.error('Erro ao iniciar scraping:', error);
+                    startBtn.disabled = false;
+                });
+        }
     </script>
 </body>
 </html>
