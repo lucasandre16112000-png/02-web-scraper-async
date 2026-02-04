@@ -146,11 +146,11 @@ REM Rodar servidor (sem mostrar janela do console)
 cd /d "%PROJECT_DIR%"
 start "" %PYTHON_EXE% server_pro_v4.py
 
-REM Aguardar servidor iniciar (mais tempo para evitar duplicação)
-timeout /t 5 /nobreak >nul
+REM Aguardar servidor iniciar
+timeout /t 4 /nobreak >nul
 
-REM Aguardar um pouco mais
-timeout /t 2 /nobreak >nul
+REM Abrir navegador
+start http://localhost:8000
 
 echo.
 echo ============================================================================
