@@ -1,427 +1,525 @@
-# 🕷️ Web Scraper Assíncrono Profissional
+# 🕷️ Web Scraper PRO V4 - Professional Async Web Scraper
 
-Um web scraper de alta performance construído com Python, `asyncio` e `aiohttp`. Projetado para extrair dados de múltiplos sites em paralelo, com rate limiting inteligente, retry automático e tratamento robusto de erros.
+A high-performance web scraper built with Python, asyncio, and aiohttp. Designed to extract data from multiple websites in parallel with intelligent rate limiting, automatic retry, and robust error handling.
 
-**✅ 100% Compatível com Windows, macOS e Linux**
+**✅ 100% Compatible with Windows, macOS, and Linux**
 
-## ✨ Funcionalidades Principais
+---
 
-- **Processamento Assíncrono**: Utiliza `asyncio` e `aiohttp` para fazer múltiplas requisições HTTP em paralelo, aumentando drasticamente a velocidade de coleta de dados.
-- **Rate Limiting Inteligente**: Inclui uma classe `RateLimiter` para controlar a frequência das requisições, evitando sobrecarregar o servidor de destino e ser bloqueado.
-- **Retry Automático com Exponential Backoff**: Tenta novamente requisições que falharam (ex: por timeout ou erro de rede) com um tempo de espera que aumenta exponencialmente, melhorando a resiliência do scraper.
-- **Validação de URLs**: Valida URLs antes de fazer requisições, evitando erros desnecessários.
-- **Logging Detalhado**: Fornece feedback em tempo real sobre o progresso do scraping, incluindo sucessos, avisos e erros.
-- **Extração Estruturada**: Extrai dados estruturados (título, autor, data, resumo) de páginas HTML usando BeautifulSoup.
-- **Estatísticas Completas**: Calcula e exibe estatísticas detalhadas como taxa de sucesso, tempo total e velocidade média.
-- **Exportação em JSON**: Salva automaticamente todos os resultados em um arquivo JSON bem formatado.
-- **Compatibilidade Multiplataforma**: Funciona perfeitamente em Windows, macOS e Linux com scripts de setup automático.
+## ✨ Key Features
 
-## 🛠️ Tecnologias Utilizadas
+- **Asynchronous Processing**: Uses asyncio and aiohttp for parallel HTTP requests
+- **Intelligent Rate Limiting**: Controls request frequency to avoid server overload
+- **Automatic Retry with Exponential Backoff**: Retries failed requests automatically
+- **URL Validation**: Validates URLs before making requests
+- **Detailed Logging**: Real-time feedback on scraping progress
+- **Advanced Data Extraction**: Extracts structured data (title, author, date, summary, content, etc.)
+- **Sentiment Analysis**: Analyzes sentiment of extracted content
+- **Complete Statistics**: Calculates success rate, total time, and average speed
+- **JSON Export**: Automatically saves results in formatted JSON
+- **Professional Dashboard**: Visual interface with interactive charts and real-time updates
+- **Site Rotation**: Automatically rotates between 30+ different sources for variety
+- **Multi-platform Compatibility**: Works perfectly on Windows, macOS, and Linux
 
-| Tecnologia | Versão | Propósito |
-|:---|:---|:---|
-| **Python** | 3.8+ | Linguagem principal |
-| **aiohttp** | 3.9.1 | Cliente/Servidor HTTP assíncrono |
-| **BeautifulSoup4** | 4.12.2 | Parsing de HTML e XML |
-| **lxml** | 4.9.3 | Parser XML/HTML de alta performance |
-| **python-dotenv** | 1.0.0 | Gerenciamento de variáveis de ambiente |
+---
 
-## 📂 Estrutura do Projeto
+## 🛠️ Technologies Used
 
-```
-/02-web-scraper-async
-├── scraper.py              # Código principal do scraper
-├── example_urls.py         # Exemplo de uso com URLs customizadas
-├── test_scraper.py         # Testes unitários
-├── requirements.txt        # Dependências do projeto
-├── setup.py                # Script de setup automático (multiplataforma)
-├── setup.bat               # Script de setup para Windows
-├── setup.sh                # Script de setup para Linux/macOS
-├── .env.example            # Exemplo de arquivo de configuração
-├── .gitignore              # Arquivos a ignorar no Git
-└── README.md               # Este arquivo
-```
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| Python | 3.8+ | Main language |
+| aiohttp | 3.9.1+ | Async HTTP client |
+| BeautifulSoup4 | 4.12.2+ | HTML/XML parsing |
+| lxml | 4.9.3+ | High-performance XML/HTML parser |
+| python-dotenv | 1.0.0+ | Environment variable management |
 
-## 📋 Guia de Instalação e Execução
+---
 
-### Pré-requisitos
+## 📋 Prerequisites
 
-1. **Git**: Ferramenta para baixar (clonar) o código do GitHub.
-   - [**Download do Git aqui**](https://git-scm.com/downloads)
+Before running the project, you need to install:
 
-2. **Python**: A linguagem de programação usada no projeto (versão 3.8 ou superior).
-   - [**Download do Python aqui**](https://www.python.org/downloads/)
-   - **Importante (Windows)**: Durante a instalação do Python, marque a caixa que diz **"Add Python to PATH"**.
+### 1. Python 3.8+
+- **Download**: https://www.python.org/downloads/
+- **⚠️ IMPORTANT (Windows)**: During installation, check the box that says **"Add Python to PATH"**
 
-### Instalação Automática (Recomendado)
+### 2. Git
+- **Download**: https://git-scm.com/download/win
+- **⚠️ IMPORTANT**: Use default installation settings
 
-#### Windows
+### 3. Internet Connection
+- Required to download dependencies and access websites for scraping
 
-1. Abra o **PowerShell** ou **Command Prompt** na pasta do projeto
-2. Execute:
-```bash
-python setup.py
-```
+---
 
-Ou simplesmente clique duas vezes em `setup.bat`
+## 🚀 Quick Start (Easiest Way)
 
-#### Linux/macOS
+### For Windows Users
 
-1. Abra o **Terminal** na pasta do projeto
-2. Execute:
-```bash
-bash setup.sh
-```
+1. **Download the project**:
+   ```powershell
+   git clone https://github.com/lucasandre16112000-png/02-web-scraper-async.git
+   cd 02-web-scraper-async
+   ```
 
-Ou:
-```bash
-python3 setup.py
-```
+2. **Run the launcher** (double-click):
+   ```
+   RODAR_WEB_SCRAPER.vbs
+   ```
+   
+   OR run in PowerShell:
+   ```powershell
+   .\RODAR_WEB_SCRAPER.bat
+   ```
 
-### Instalação Manual
+3. **That's it!** The dashboard will open automatically in your browser.
 
-#### Passo 1: Baixar o Projeto (Clonar)
+### For macOS/Linux Users
 
-Abra o seu terminal (ou **Git Bash** no Windows) e use o comando abaixo para baixar o projeto:
+1. **Download the project**:
+   ```bash
+   git clone https://github.com/lucasandre16112000-png/02-web-scraper-async.git
+   cd 02-web-scraper-async
+   ```
+
+2. **Run the setup**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   python3 server.py
+   ```
+
+3. **Open your browser**: http://localhost:8000
+
+---
+
+## 📝 Step-by-Step Installation Guide
+
+### Step 1: Clone the Repository
+
+Open your terminal (or PowerShell on Windows) and run:
 
 ```bash
 git clone https://github.com/lucasandre16112000-png/02-web-scraper-async.git
 cd 02-web-scraper-async
 ```
 
-#### Passo 2: Criar e Ativar um Ambiente Virtual
+### Step 2: Create Virtual Environment
 
-Um ambiente virtual isola as dependências do projeto, evitando conflitos com outras aplicações Python.
+A virtual environment isolates project dependencies from your system Python.
 
-**No Windows (PowerShell):**
-```bash
+**Windows (PowerShell)**:
+```powershell
 python -m venv venv
 .\venv\Scripts\activate
 ```
 
-**No Windows (Command Prompt):**
-```bash
+**Windows (Command Prompt)**:
+```cmd
 python -m venv venv
 venv\Scripts\activate
 ```
 
-**No macOS ou Linux:**
+**macOS/Linux**:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-Você saberá que o ambiente virtual está ativado quando ver `(venv)` no início da linha do seu terminal.
+You'll know the virtual environment is active when you see `(venv)` at the beginning of your terminal line.
 
-#### Passo 3: Instalar as Dependências
+### Step 3: Install Dependencies
 
-Com o ambiente virtual ativado, instale as bibliotecas necessárias:
+With the virtual environment activated:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-#### Passo 4: Executar o Scraper
-
-Execute o script principal para começar o scraping:
+### Step 4: Run the Server
 
 ```bash
-python scraper.py
+# Windows
+python server.py
+
+# macOS/Linux
+python3 server.py
 ```
 
-#### Passo 5: Verificar os Resultados
+### Step 5: Open Dashboard
 
-- O terminal mostrará o progresso do scraping em tempo real com emojis e mensagens claras.
-- Ao final, um arquivo chamado `scraping_results.json` será criado na mesma pasta, contendo todos os dados extraídos em formato JSON.
-- Você pode abrir este arquivo com qualquer editor de texto ou visualizador JSON.
+The browser will open automatically at: **http://localhost:8000**
 
-## 🚀 Exemplos de Uso
+If not, open your browser and go to: `http://localhost:8000`
 
-### Exemplo 1: Usar o Script Padrão
+### Step 6: Start Scraping
 
-O script padrão (`scraper.py`) já contém um exemplo pronto para usar:
+1. Click the **"🚀 Start Scraping PRO"** button
+2. Watch the progress bar in real-time
+3. See the data appear in charts and tables
+4. Results are saved to `scraping_results.json`
+
+---
+
+## 🎯 Usage Examples
+
+### Example 1: Run the Default Scraper
 
 ```bash
-python scraper.py
+python server.py
 ```
 
-### Exemplo 2: Customizar URLs
+Then click the button in the dashboard.
 
-Para scraper URLs diferentes, edite o arquivo `example_urls.py` e modifique a lista `urls`:
-
-```python
-urls = [
-    "https://seu-site-1.com",
-    "https://seu-site-2.com",
-    "https://seu-site-3.com",
-]
-```
-
-Depois execute:
-
-```bash
-python example_urls.py
-```
-
-### Exemplo 3: Usar o Scraper em Seu Próprio Código
-
-Você pode importar o scraper em seu próprio projeto Python:
+### Example 2: Use Scraper in Your Own Code
 
 ```python
 import asyncio
 from scraper import WebScraper
 
-async def meu_scraper():
+async def my_scraper():
     scraper = WebScraper(
-        requests_per_second=2.0,  # Máximo de 2 requisições por segundo
-        timeout=10,                # Timeout de 10 segundos
-        max_retries=3              # Máximo de 3 tentativas
+        requests_per_second=2.0,  # Max 2 requests/second
+        timeout=10,                # 10 second timeout
+        max_retries=3              # Max 3 attempts
     )
     
-    urls = ["https://exemplo.com", "https://outro-site.com"]
+    urls = ["https://example.com", "https://another-site.com"]
     articles = await scraper.scrape_articles(urls)
     
     for article in articles:
-        print(f"Título: {article.title}")
-        print(f"URL: {article.url}")
+        print(f"Title: {article['title']}")
+        print(f"URL: {article['url']}")
+        print(f"Sentiment: {article['sentiment']}")
 
-asyncio.run(meu_scraper())
+asyncio.run(my_scraper())
 ```
 
-### Exemplo 4: Especificar Diretório de Saída
+---
 
-```python
-import asyncio
-from scraper import WebScraper
+## ⚙️ Configuration
 
-async def meu_scraper():
-    scraper = WebScraper(
-        requests_per_second=2.0,
-        timeout=10,
-        max_retries=3,
-        output_dir="./resultados"  # Salvar em outro diretório
-    )
-    
-    urls = ["https://exemplo.com"]
-    articles = await scraper.scrape_articles(urls)
-    scraper.save_results(articles)
+### Environment Variables
 
-asyncio.run(meu_scraper())
-```
+Create a `.env` file in the project root:
 
-## ⚙️ Configuração Avançada
-
-### Parâmetros do WebScraper
-
-Ao criar uma instância do `WebScraper`, você pode customizar os seguintes parâmetros:
-
-```python
-scraper = WebScraper(
-    requests_per_second=2.0,  # Taxa de requisições (padrão: 2.0)
-    timeout=10,                # Timeout em segundos (padrão: 10)
-    max_retries=3,             # Máximo de tentativas (padrão: 3)
-    output_dir=None            # Diretório de saída (padrão: diretório atual)
-)
-```
-
-- **requests_per_second**: Controla quantas requisições são feitas por segundo. Valores menores são mais respeitosos com o servidor.
-- **timeout**: Tempo máximo de espera para cada requisição em segundos.
-- **max_retries**: Número de tentativas antes de desistir de uma URL.
-- **output_dir**: Diretório onde os resultados serão salvos.
-
-### Variáveis de Ambiente
-
-Você pode configurar o scraper usando variáveis de ambiente. Copie `.env.example` para `.env` e edite:
-
-```bash
-# Configurações do Web Scraper
-
-# Taxa de requisições por segundo (padrão: 2.0)
+```env
+# Web Scraper Configuration
 REQUESTS_PER_SECOND=2.0
-
-# Timeout em segundos para cada requisição (padrão: 10)
 TIMEOUT=10
-
-# Máximo de tentativas para cada URL (padrão: 3)
 MAX_RETRIES=3
-
-# Nível de log (DEBUG, INFO, WARNING, ERROR)
 LOG_LEVEL=INFO
 ```
 
-## 🧪 Executar Testes
+### WebScraper Parameters
 
-O projeto inclui testes unitários abrangentes:
-
-```bash
-python test_scraper.py
+```python
+scraper = WebScraper(
+    requests_per_second=2.0,  # Requests per second (default: 2.0)
+    timeout=10,                # Timeout in seconds (default: 10)
+    max_retries=3,             # Max retry attempts (default: 3)
+    output_dir=None            # Output directory (default: current)
+)
 ```
 
-Os testes cobrem:
-- Validação de URLs
-- Rate limiting
-- Criação de artigos
-- Inicialização do scraper
-- Scraping com URLs vazias/inválidas
-- Integração com URLs reais
+---
 
-## 🤔 Solução de Problemas Comuns
+## 📊 Dashboard Features
 
-### Problema: "ModuleNotFoundError: No module named 'aiohttp'"
+### Real-time Statistics
+- Total articles collected
+- Success/failure count
+- Average engagement score
+- Processing time
 
-**Solução**: Certifique-se de que:
-1. O ambiente virtual (venv) está ativado (você deve ver `(venv)` no terminal)
-2. Você executou `pip install -r requirements.txt`
+### Interactive Charts
+- Sentiment distribution (pie chart)
+- Articles by source (bar chart)
+- Articles by category (pie chart)
+- Top articles by engagement (line chart)
 
-### Problema: "Erros de Conexão ou Timeout"
+### Data Display
+- Complete article list with all details
+- Filterable by sentiment
+- Sortable columns
+- Expandable article details
 
-**Solução**: 
-- A internet pode estar instável ou o site alvo pode estar bloqueando requisições.
-- Tente aumentar o `timeout` ou reduzir `requests_per_second`.
-- O script já tenta lidar com isso automaticamente, mas se o erro persistir, pode ser um problema de rede.
+---
 
-### Problema: "SSL: CERTIFICATE_VERIFY_FAILED"
+## 🔄 Data Collection Process
 
-**Solução**: O script já desativa a verificação SSL por padrão. Se o erro persistir, verifique sua conexão de internet.
+1. **Site Selection**: Randomly selects from 30+ sources
+2. **Fetching**: Asynchronously fetches content from selected sites
+3. **Parsing**: Extracts structured data using BeautifulSoup
+4. **Analysis**: Performs sentiment analysis and categorization
+5. **Storage**: Saves results to JSON and displays in dashboard
+6. **Visualization**: Updates charts and tables in real-time
 
-### Problema: "Arquivo scraping_results.json não foi criado"
+---
 
-**Solução**:
-- Verifique se o script executou até o final sem erros.
-- Certifique-se de que você tem permissão de escrita na pasta do projeto.
-- Verifique o terminal para ver se há mensagens de erro.
-
-### Problema: "Python não reconhecido no Windows"
-
-**Solução**:
-1. Reinstale Python marcando **"Add Python to PATH"** durante a instalação
-2. Reinicie o computador
-3. Abra um novo terminal e tente novamente
-
-## 📊 Entendendo a Saída
-
-Quando você executa o scraper, você verá uma saída como esta:
+## 📁 Project Structure
 
 ```
-================================================================================
-WEB SCRAPER PROFISSIONAL - EXEMPLO DE USO
-Sistema Operacional: Windows
-================================================================================
-
-📊 Iniciando scraping de 3 URLs...
-⏱️  Rate limit: 2 requisições/segundo
-🔄 Máximo de tentativas: 3
-
-✓ Fetched: https://news.ycombinator.com
-✓ Fetched: https://www.reddit.com/r/programming
-✓ Fetched: https://www.techcrunch.com
-
-================================================================================
-RESULTADOS
-================================================================================
-
-📄 Artigo 1:
-   Título: Hacker News
-   URL: https://news.ycombinator.com
-   Autor: N/A
-   Data: N/A
-   Resumo: N/A
-
-[... mais artigos ...]
-
-================================================================================
-ESTATÍSTICAS
-================================================================================
-
-Total de URLs: 3
-Sucesso: 3
-Falhas: 0
-Tempo total: 5.23s
-Taxa média: 0.57 itens/segundo
-Status: completed
-
-✅ Resultados salvos em 'scraping_results.json'
+02-web-scraper-async/
+├── scraper.py                # Main scraper with advanced features
+├── server.py                 # Web server and API
+├── dashboard.html            # Professional web interface
+├── RODAR_WEB_SCRAPER.vbs    # Windows launcher (VBScript)
+├── RODAR_WEB_SCRAPER.bat    # Windows launcher (Batch)
+├── requirements.txt          # Python dependencies
+├── README.md                 # This file
+└── scraping_results.json     # Output file (generated)
 ```
 
-## 📁 Formato do Arquivo JSON de Saída
+---
 
-O arquivo `scraping_results.json` contém todos os dados extraídos em um formato estruturado:
+## 🆘 Troubleshooting
+
+### Problem: "Python not found" (Windows)
+
+**Solution**:
+1. Reinstall Python from https://www.python.org/downloads/
+2. **Make sure to check "Add Python to PATH"**
+3. Restart your computer
+4. Open a new terminal and try again
+
+### Problem: "ModuleNotFoundError: No module named 'aiohttp'"
+
+**Solution**:
+1. Make sure virtual environment is activated (you should see `(venv)` in terminal)
+2. Run: `pip install -r requirements.txt`
+3. Wait for installation to complete
+
+### Problem: "Port 8000 already in use"
+
+**Solution**:
+1. Close the browser
+2. Wait 5 seconds
+3. Try again
+4. OR change the port in `server.py` (line with `PORT = 8000`)
+
+### Problem: "Connection timeout or network errors"
+
+**Solution**:
+1. Check your internet connection
+2. Try again in a few minutes
+3. Some websites may have rate limiting or blocking
+4. The scraper has automatic retry with exponential backoff
+
+### Problem: "Browser doesn't open automatically"
+
+**Solution**:
+1. Open your browser manually
+2. Go to: http://localhost:8000
+3. The server should be running in the terminal
+
+### Problem: "No data appears in dashboard"
+
+**Solution**:
+1. Click the "🚀 Start Scraping PRO" button
+2. Wait for the progress bar to complete
+3. Check the terminal for any error messages
+4. Make sure you have an active internet connection
+
+---
+
+## 📊 Output Format
+
+### JSON Results
+
+The scraper saves results to `scraping_results.json`:
 
 ```json
 {
-  "timestamp": "2025-12-12T18:30:45.123456",
+  "timestamp": "2026-02-03T20:00:00.000000",
+  "sources": [
+    {
+      "name": "Hacker News",
+      "url": "https://news.ycombinator.com",
+      "articles_count": 15
+    }
+  ],
   "articles": [
     {
-      "title": "Hacker News",
-      "url": "https://news.ycombinator.com",
-      "author": null,
-      "published_date": null,
-      "summary": null,
-      "scraped_at": "2025-12-12T18:30:45.123456"
+      "title": "Article Title",
+      "url": "https://example.com/article",
+      "author": "Author Name",
+      "published_date": "2026-02-03",
+      "summary": "Article summary...",
+      "content": "Full article content...",
+      "category": "Technology",
+      "tags": ["python", "web", "scraping"],
+      "views": 1000,
+      "likes": 150,
+      "comments": 45,
+      "shares": 20,
+      "engagement_score": 8.5,
+      "sentiment": "positive",
+      "keywords": ["python", "scraping", "data"],
+      "image_url": "https://example.com/image.jpg",
+      "reading_time": 5,
+      "scraped_at": "2026-02-03T20:00:00.000000"
     }
   ],
   "statistics": {
-    "total_items": 3,
-    "successful_items": 3,
-    "failed_items": 0,
-    "total_time": 5.23,
-    "items_per_second": 0.57,
-    "status": "completed"
+    "total_articles": 150,
+    "total_sources": 10,
+    "successful_sources": 10,
+    "failed_sources": 0,
+    "total_time": 45.23,
+    "items_per_second": 3.32,
+    "average_engagement": 7.8,
+    "sentiment_distribution": {
+      "positive": 85,
+      "neutral": 50,
+      "negative": 15
+    },
+    "categories": {
+      "Technology": 60,
+      "Business": 40,
+      "Science": 50
+    }
   }
 }
 ```
 
-## 📋 Logs
+---
 
-Os logs são salvos automaticamente em `logs/scraper.log`. Você pode verificar este arquivo para mais detalhes sobre a execução:
+## 🔒 Best Practices & Ethics
 
-```bash
-# Windows
-type logs\scraper.log
+1. **Respect robots.txt**: Check the site's `robots.txt` before scraping
+2. **Use Rate Limiting**: Don't make requests too fast
+3. **Check Terms of Service**: Ensure you have permission to scrape
+4. **Identify Yourself**: Use appropriate User-Agent (done automatically)
+5. **Don't Store Personal Data**: Be careful with sensitive information
+6. **Be Respectful**: Don't overload servers with requests
 
-# Linux/macOS
-cat logs/scraper.log
-```
+---
 
-## 🔒 Boas Práticas e Ética
+## 📈 Performance Metrics
 
-- **Respeite o robots.txt**: Sempre verifique o arquivo `robots.txt` do site antes de fazer scraping.
-- **Use Rate Limiting**: Não faça requisições muito rápidas para não sobrecarregar os servidores.
-- **Verifique os Termos de Serviço**: Certifique-se de que você tem permissão para fazer scraping do site.
-- **Identifique-se**: Use um User-Agent apropriado (o script já faz isso automaticamente).
-- **Não Armazene Dados Pessoais**: Tenha cuidado ao coletar dados que possam conter informações pessoais.
+- **Async Processing**: Up to 10x faster than synchronous requests
+- **Rate Limiting**: Configurable from 0.5 to 10 requests/second
+- **Retry Logic**: Automatic recovery from transient failures
+- **Memory Efficient**: Processes data in streams
+- **Scalable**: Can handle 100+ URLs simultaneously
 
-## 🔄 Melhorias Implementadas (v2.0)
+---
 
-- ✅ Compatibilidade total com Windows (event loop policy)
-- ✅ Validação robusta de URLs
-- ✅ Scripts de setup automático (Python, Batch, Shell)
-- ✅ Suporte a variáveis de ambiente (.env)
-- ✅ Diretório de logs automático
-- ✅ Tratamento de encoding UTF-8 em Windows
-- ✅ Testes unitários expandidos
-- ✅ Melhor tratamento de erros
-- ✅ Documentação completa
-- ✅ Suporte a diretório de saída customizável
+## 🔄 Data Sources (30+ Sites)
 
-## 👨‍💻 Autor
+### Tech News
+- Hacker News
+- TechCrunch
+- The Verge
+- Wired
+- Ars Technica
+- AnandTech
 
-Lucas André S - [GitHub](https://github.com/lucasandre16112000-png)
+### Programming
+- Reddit r/programming
+- Dev.to
+- Medium
+- CSS Tricks
+- Smashing Magazine
+- A List Apart
 
-## 📝 Licença
+### Product & Startup
+- Product Hunt
+- Indie Hackers
+- Y Combinator
 
-Este projeto é licenciado sob a MIT License. Veja o arquivo LICENSE para mais detalhes.
+### Community
+- GitHub Trending
+- Lobsters
+- Hacker News New
 
-## 🤝 Contribuições
+### Analysis
+- Slashdot
+- InfoQ
+- DZone
+- SitePoint
 
-Contribuições são bem-vindas! Sinta-se livre para:
-- Reportar bugs
-- Sugerir novas funcionalidades
-- Fazer pull requests
+### Design
+- Web Designer Depot
+- Dribbble
+- Designer Hangout
 
-## 📞 Suporte
+### Learning
+- FreeCodeCamp
+- Scotch.io
+- Egghead
 
-Se você encontrar problemas ou tiver dúvidas:
-1. Verifique a seção "Solução de Problemas Comuns"
-2. Verifique os logs em `logs/scraper.log`
-3. Abra uma issue no GitHub
+### Showcase
+- Codepen
+- Codesignal
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest new features
+- Submit pull requests
+- Improve documentation
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+## 👨‍💻 Author
+
+**Lucas André S**
+- GitHub: https://github.com/lucasandre16112000-png
+
+---
+
+## 📞 Support
+
+If you encounter issues:
+
+1. Check the **Troubleshooting** section above
+2. Review the **logs/scraper.log** file for details
+3. Check your internet connection
+4. Ensure Python and Git are properly installed
+5. Open an issue on GitHub
+
+---
+
+## 🚀 Version History
+
+### v4.0 (Current)
+- ✅ Professional dashboard with real-time updates
+- ✅ 30+ data sources with automatic rotation
+- ✅ Advanced sentiment analysis
+- ✅ Interactive charts and visualizations
+- ✅ Complete data extraction (16+ fields)
+- ✅ Windows launcher (.vbs) - no terminal visible
+- ✅ 100% Windows compatibility
+
+### v3.0
+- ✅ Improved data extraction
+- ✅ Better categorization
+- ✅ Enhanced error handling
+
+### v2.0
+- ✅ Windows event loop compatibility
+- ✅ Automatic setup scripts
+- ✅ Environment variable support
+
+### v1.0
+- ✅ Basic async scraper
+- ✅ Rate limiting
+- ✅ Retry logic
+
+---
+
+**Made with ❤️ for easy web scraping**
+
+Last updated: February 3, 2026
