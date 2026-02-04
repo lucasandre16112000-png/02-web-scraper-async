@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Scraper PRO - Dashboard Avançado</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <title>Web Scraper - Portfólio Profissional</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,27 +12,15 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --dark: #1f2937;
-            --light: #f9fafb;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-            color: var(--dark);
         }
 
         .container {
-            max-width: 1800px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -41,18 +28,19 @@
             background: white;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             text-align: center;
         }
 
         .header h1 {
+            color: #667eea;
             font-size: 3em;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
         }
 
         .header p {
@@ -61,95 +49,89 @@
             margin-bottom: 20px;
         }
 
-        .badges {
+        .header-info {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 30px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
 
-        .badge {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+        .info-badge {
+            background: #f0f4ff;
             padding: 10px 20px;
             border-radius: 20px;
-            font-size: 0.9em;
+            color: #667eea;
             font-weight: bold;
+            font-size: 0.9em;
         }
 
         .status-container {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            text-align: center;
         }
 
         .status-title {
-            font-size: 1.5em;
-            color: var(--dark);
+            color: #333;
+            font-size: 1.3em;
             margin-bottom: 20px;
             font-weight: bold;
         }
 
-        .progress-section {
+        .status-message {
+            color: #666;
+            font-size: 1.1em;
             margin-bottom: 20px;
+            min-height: 30px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 10px;
-            background: #e5e7eb;
+            height: 8px;
+            background: #e0e0e0;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             width: 0%;
             transition: width 0.3s ease;
             border-radius: 10px;
         }
 
         .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        .status-message {
-            font-size: 1.1em;
-            color: var(--primary);
-            margin-bottom: 15px;
+            color: #667eea;
             font-weight: bold;
-            min-height: 30px;
+            font-size: 0.9em;
         }
 
-        .btn-container {
+        .button-container {
             text-align: center;
             margin-top: 20px;
         }
 
         .btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border-radius: 25px;
-            font-size: 1.1em;
+            font-size: 1em;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            font-weight: bold;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
         .btn:disabled {
@@ -160,58 +142,41 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
         .stat-card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: all 0.3s ease;
-            border-top: 5px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            border-top: 4px solid #667eea;
         }
 
         .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .stat-card:hover::before {
-            left: 100%;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
         .stat-card.success {
-            border-top-color: var(--success);
+            border-top-color: #10b981;
         }
 
-        .stat-card.danger {
-            border-top-color: var(--danger);
+        .stat-card.error {
+            border-top-color: #ef4444;
         }
 
         .stat-card.info {
-            border-top-color: var(--info);
+            border-top-color: #3b82f6;
         }
 
         .stat-label {
             color: #999;
-            font-size: 0.85em;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 10px;
@@ -220,19 +185,19 @@
         .stat-value {
             font-size: 2.5em;
             font-weight: bold;
-            color: var(--primary);
+            color: #667eea;
         }
 
         .stat-card.success .stat-value {
-            color: var(--success);
+            color: #10b981;
         }
 
-        .stat-card.danger .stat-value {
-            color: var(--danger);
+        .stat-card.error .stat-value {
+            color: #ef4444;
         }
 
         .stat-card.info .stat-value {
-            color: var(--info);
+            color: #3b82f6;
         }
 
         .charts-grid {
@@ -244,103 +209,32 @@
 
         .chart-container {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .chart-container h3 {
-            color: var(--dark);
+            color: #333;
             margin-bottom: 20px;
             font-size: 1.3em;
         }
 
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .analysis-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .analysis-card h4 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .analysis-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95em;
-        }
-
-        .analysis-item:last-child {
-            border-bottom: none;
-        }
-
-        .analysis-label {
-            color: #666;
-        }
-
-        .analysis-value {
-            font-weight: bold;
-            color: var(--primary);
-        }
-
         .articles-section {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .articles-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .articles-section h2 {
+            color: #333;
             margin-bottom: 25px;
-        }
-
-        .articles-header h2 {
-            color: var(--dark);
             font-size: 1.5em;
         }
 
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: #f0f0f0;
-            border: 2px solid transparent;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
         .article-card {
-            border-left: 5px solid var(--primary);
+            border-left: 5px solid #667eea;
             padding: 20px;
             margin-bottom: 15px;
             background: #f9fafb;
@@ -354,50 +248,32 @@
             transform: translateX(5px);
         }
 
-        .article-card.negative {
-            border-left-color: var(--danger);
-        }
-
-        .article-card.positive {
-            border-left-color: var(--success);
-        }
-
-        .article-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 10px;
+        .article-card.failed {
+            border-left-color: #ef4444;
+            background: #fef2f2;
         }
 
         .article-title {
             font-size: 1.1em;
             font-weight: bold;
-            color: var(--dark);
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .article-source {
-            background: var(--primary);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: bold;
-            white-space: nowrap;
+            color: #333;
+            margin-bottom: 10px;
+            word-break: break-word;
         }
 
         .article-url {
-            color: var(--primary);
+            color: #667eea;
             text-decoration: none;
             font-size: 0.9em;
             margin-bottom: 10px;
             display: inline-block;
             word-break: break-all;
+            transition: all 0.3s ease;
         }
 
         .article-url:hover {
             text-decoration: underline;
+            color: #764ba2;
         }
 
         .article-meta {
@@ -405,53 +281,44 @@
             gap: 20px;
             margin-top: 10px;
             flex-wrap: wrap;
+        }
+
+        .article-meta-item {
             font-size: 0.85em;
             color: #666;
         }
 
-        .article-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .article-meta-label {
+            font-weight: bold;
+            color: #333;
         }
 
-        .engagement-bar {
-            width: 100%;
-            height: 6px;
-            background: #e5e7eb;
-            border-radius: 3px;
+        .article-summary {
             margin-top: 10px;
-            overflow: hidden;
+            padding-top: 10px;
+            border-top: 1px solid #e5e7eb;
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
         }
 
-        .engagement-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 3px;
-        }
-
-        .sentiment-badge {
+        .status-badge {
             display: inline-block;
             padding: 5px 12px;
-            border-radius: 15px;
+            border-radius: 20px;
             font-size: 0.8em;
             font-weight: bold;
             margin-top: 10px;
         }
 
-        .sentiment-positive {
+        .status-badge.success {
             background: #d1fae5;
             color: #065f46;
         }
 
-        .sentiment-negative {
+        .status-badge.failed {
             background: #fee2e2;
             color: #991b1b;
-        }
-
-        .sentiment-neutral {
-            background: #dbeafe;
-            color: #0c4a6e;
         }
 
         .no-data {
@@ -460,12 +327,17 @@
             color: #999;
         }
 
+        .no-data p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
         .loading-spinner {
             display: inline-block;
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
+            border-top: 4px solid #667eea;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 20px 0;
@@ -492,10 +364,6 @@
             padding: 20px;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2em;
@@ -509,142 +377,98 @@
                 font-size: 2em;
             }
 
-            .article-header {
+            .header-info {
                 flex-direction: column;
-            }
-
-            .article-source {
-                margin-top: 10px;
+                gap: 10px;
             }
         }
 
-        .top-articles {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
+        .hidden {
+            display: none !important;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 20px;
+            border-left: 4px solid #ef4444;
         }
 
-        .top-articles h4 {
-            margin-bottom: 15px;
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #10b981;
         }
 
-        .top-article-item {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .top-article-item:last-child {
-            border-bottom: none;
-        }
-
-        .top-article-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .top-article-score {
-            font-size: 0.9em;
-            opacity: 0.9;
+        .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div style="font-size: 3em; margin-bottom: 10px;">🚀</div>
-            <h1>Web Scraper PRO</h1>
-            <p>Dashboard Avançado com Análises em Tempo Real</p>
-            <div class="badges">
-                <div class="badge">⚡ Processamento Assíncrono</div>
-                <div class="badge">📊 Análises Avançadas</div>
-                <div class="badge">🎨 Interface Profissional</div>
-                <div class="badge">🔥 10+ Fontes</div>
+            <div class="icon">🕷️</div>
+            <h1>Web Scraper Profissional</h1>
+            <p>Coleta automática de dados de múltiplos websites</p>
+            <div class="header-info">
+                <div class="info-badge">⚡ Processamento Assíncrono</div>
+                <div class="info-badge">📊 Análise em Tempo Real</div>
+                <div class="info-badge">🎨 Interface Responsiva</div>
             </div>
         </div>
 
         <div class="status-container">
-            <div class="status-title">📊 Status do Scraper</div>
+            <div class="status-title">Status do Scraper</div>
             <div class="status-message" id="statusMessage">Inicializando...</div>
-            <div class="progress-section">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <div class="progress-text">
-                    <span id="progressText">0%</span>
-                    <span id="progressTime">Aguardando...</span>
-                </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="btn-container">
-                <button class="btn" id="startBtn" onclick="startScraping()">🚀 Iniciar Scraping PRO</button>
+            <div class="progress-text" id="progressText">0%</div>
+            <div class="button-container">
+                <button class="btn" id="startBtn" onclick="startScraping()">🚀 Iniciar Scraping</button>
             </div>
         </div>
 
         <div id="contentArea" class="hidden">
             <div class="stats-grid">
                 <div class="stat-card success">
-                    <div class="stat-label">📰 Total de Artigos</div>
-                    <div class="stat-value" id="totalArticles">0</div>
+                    <div class="stat-label">✅ Sucessos</div>
+                    <div class="stat-value" id="successCount">0</div>
+                </div>
+                <div class="stat-card error">
+                    <div class="stat-label">❌ Falhas</div>
+                    <div class="stat-value" id="failureCount">0</div>
                 </div>
                 <div class="stat-card info">
-                    <div class="stat-label">📚 Fontes Coletadas</div>
-                    <div class="stat-value" id="sourcesCount">0</div>
+                    <div class="stat-label">⏱️ Tempo Total</div>
+                    <div class="stat-value" id="totalTime">0s</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">📂 Categorias</div>
-                    <div class="stat-value" id="categoriesCount">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">💬 Engajamento Médio</div>
-                    <div class="stat-value" id="avgEngagement">0%</div>
+                    <div class="stat-label">📊 Taxa Média</div>
+                    <div class="stat-value" id="averageRate">0</div>
                 </div>
             </div>
 
             <div class="charts-grid">
                 <div class="chart-container">
-                    <h3>📈 Distribuição de Sentimento</h3>
-                    <canvas id="sentimentChart"></canvas>
+                    <h3>📈 Taxa de Sucesso</h3>
+                    <canvas id="successChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <h3>📰 Artigos por Fonte</h3>
-                    <canvas id="sourcesChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>📂 Artigos por Categoria</h3>
-                    <canvas id="categoriesChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>🔥 Top Artigos por Engajamento</h3>
-                    <canvas id="engagementChart"></canvas>
-                </div>
-            </div>
-
-            <div class="analysis-grid">
-                <div class="analysis-card">
-                    <h4>😊 Análise de Sentimento</h4>
-                    <div id="sentimentAnalysis"></div>
-                </div>
-                <div class="analysis-card">
-                    <h4>🔥 Top Artigos</h4>
-                    <div class="top-articles" id="topArticles"></div>
-                </div>
-                <div class="analysis-card">
-                    <h4>📊 Estatísticas Gerais</h4>
-                    <div id="generalStats"></div>
+                    <h3>⏱️ Tempo de Processamento</h3>
+                    <canvas id="timeChart"></canvas>
                 </div>
             </div>
 
             <div class="articles-section">
-                <div class="articles-header">
-                    <h2>📄 Artigos Extraídos</h2>
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" onclick="filterArticles('all')">Todos</button>
-                        <button class="filter-btn" onclick="filterArticles('positive')">😊 Positivos</button>
-                        <button class="filter-btn" onclick="filterArticles('negative')">😞 Negativos</button>
-                        <button class="filter-btn" onclick="filterArticles('neutral')">😐 Neutros</button>
-                    </div>
-                </div>
+                <h2>📄 Artigos Extraídos</h2>
                 <div id="articlesContainer"></div>
             </div>
 
@@ -655,27 +479,33 @@
     </div>
 
     <div class="footer">
-        <p>💼 Portfólio Profissional | Web Scraper PRO | 2026</p>
+        <p>💼 Portfólio Profissional | Web Scraper Assíncrono | 2026</p>
     </div>
 
     <script>
-        let charts = {};
-        let allArticles = [];
-        let currentFilter = 'all';
+        let successChart, timeChart;
+        let isScraperRunning = false;
 
+        // Carregar dados inicialmente
         window.addEventListener('load', function() {
             loadData();
+            // Atualizar dados a cada 2 segundos
             setInterval(loadData, 2000);
         });
 
         function loadData() {
             fetch('/api/scraping-data')
                 .then(response => response.json())
-                .then(data => updateUI(data))
-                .catch(error => console.error('Erro:', error));
+                .then(data => {
+                    updateUI(data);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar dados:', error);
+                });
         }
 
         function updateUI(data) {
+            // Atualizar status
             const statusMsg = document.getElementById('statusMessage');
             const progressFill = document.getElementById('progressFill');
             const progressText = document.getElementById('progressText');
@@ -686,233 +516,121 @@
             progressFill.style.width = data.progress + '%';
             progressText.textContent = data.progress + '%';
 
-            startBtn.disabled = data.status === 'scraping';
+            // Habilitar/desabilitar botão
+            isScraperRunning = data.status === 'scraping';
+            startBtn.disabled = isScraperRunning;
 
+            // Mostrar conteúdo quando completado
             if (data.status === 'completed' && data.articles.length > 0) {
                 contentArea.classList.remove('hidden');
-                allArticles = data.articles;
 
                 // Atualizar estatísticas
-                document.getElementById('totalArticles').textContent = data.articles.length;
-                document.getElementById('sourcesCount').textContent = new Set(data.articles.map(a => a.source)).size;
-                document.getElementById('categoriesCount').textContent = new Set(data.articles.map(a => a.category)).size;
-                document.getElementById('avgEngagement').textContent = (data.statistics.avg_engagement || 0).toFixed(1) + '%';
+                document.getElementById('successCount').textContent = data.statistics.successful_items;
+                document.getElementById('failureCount').textContent = data.statistics.failed_items;
+                document.getElementById('totalTime').textContent = data.statistics.total_time.toFixed(2) + 's';
+                document.getElementById('averageRate').textContent = data.statistics.items_per_second.toFixed(2) + '/s';
                 document.getElementById('timestampDisplay').textContent = new Date(data.timestamp).toLocaleString('pt-BR');
 
-                // Criar gráficos
-                createCharts(data);
-
-                // Análises
-                updateAnalysis(data);
-
-                // Artigos
-                displayArticles(allArticles);
-            }
-        }
-
-        function createCharts(data) {
-            // Gráfico de Sentimento
-            const sentiments = data.statistics.sentiment_distribution || {};
-            const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
-            if (charts.sentiment) charts.sentiment.destroy();
-            charts.sentiment = new Chart(sentimentCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(sentiments),
-                    datasets: [{
-                        data: Object.values(sentiments),
-                        backgroundColor: ['#10b981', '#ef4444', '#3b82f6'],
-                        borderColor: ['#059669', '#dc2626', '#1d4ed8'],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'bottom' }
+                // Gráfico de sucesso
+                const ctx1 = document.getElementById('successChart').getContext('2d');
+                if (successChart) successChart.destroy();
+                successChart = new Chart(ctx1, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Sucessos', 'Falhas'],
+                        datasets: [{
+                            data: [data.statistics.successful_items, data.statistics.failed_items],
+                            backgroundColor: ['#10b981', '#ef4444'],
+                            borderColor: ['#059669', '#dc2626'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
                     }
+                });
+
+                // Gráfico de tempo
+                const ctx2 = document.getElementById('timeChart').getContext('2d');
+                if (timeChart) timeChart.destroy();
+                timeChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Tempo Total (s)'],
+                        datasets: [{
+                            label: 'Tempo (segundos)',
+                            data: [data.statistics.total_time],
+                            backgroundColor: '#667eea',
+                            borderColor: '#5568d3',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: {
+                                display: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Exibir artigos
+                const articlesContainer = document.getElementById('articlesContainer');
+                if (data.articles.length === 0) {
+                    articlesContainer.innerHTML = '<div class="no-data"><p>Nenhum artigo foi extraído com sucesso.</p></div>';
+                } else {
+                    articlesContainer.innerHTML = data.articles.map((article, index) => `
+                        <div class="article-card ${article.title === 'N/A' ? 'failed' : ''}">
+                            <div class="article-title">${index + 1}. ${article.title}</div>
+                            <a href="${article.url}" target="_blank" class="article-url">${article.url}</a>
+                            <div class="article-meta">
+                                <div class="article-meta-item">
+                                    <span class="article-meta-label">Autor:</span> ${article.author || 'N/A'}
+                                </div>
+                                <div class="article-meta-item">
+                                    <span class="article-meta-label">Data:</span> ${article.published_date || 'N/A'}
+                                </div>
+                            </div>
+                            ${article.summary ? `<div class="article-summary"><strong>Resumo:</strong> ${article.summary}</div>` : ''}
+                            <div class="article-meta">
+                                <div class="article-meta-item">
+                                    <span class="article-meta-label">Coletado em:</span> ${new Date(article.scraped_at).toLocaleString('pt-BR')}
+                                </div>
+                            </div>
+                            <span class="status-badge ${article.title === 'N/A' ? 'failed' : 'success'}">
+                                ${article.title === 'N/A' ? '❌ Falhou' : '✅ Sucesso'}
+                            </span>
+                        </div>
+                    `).join('');
                 }
-            });
-
-            // Gráfico de Fontes
-            const sources = {};
-            data.articles.forEach(a => {
-                sources[a.source] = (sources[a.source] || 0) + 1;
-            });
-
-            const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
-            if (charts.sources) charts.sources.destroy();
-            charts.sources = new Chart(sourcesCtx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(sources),
-                    datasets: [{
-                        label: 'Artigos',
-                        data: Object.values(sources),
-                        backgroundColor: '#667eea',
-                        borderColor: '#5568d3',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    indexAxis: 'y',
-                    scales: { x: { beginAtZero: true } }
-                }
-            });
-
-            // Gráfico de Categorias
-            const categories = {};
-            data.articles.forEach(a => {
-                categories[a.category] = (categories[a.category] || 0) + 1;
-            });
-
-            const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
-            if (charts.categories) charts.categories.destroy();
-            charts.categories = new Chart(categoriesCtx, {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(categories),
-                    datasets: [{
-                        data: Object.values(categories),
-                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe'],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { position: 'bottom' } }
-                }
-            });
-
-            // Gráfico de Engajamento
-            const topByEngagement = data.articles
-                .sort((a, b) => b.engagement_score - a.engagement_score)
-                .slice(0, 5);
-
-            const engagementCtx = document.getElementById('engagementChart').getContext('2d');
-            if (charts.engagement) charts.engagement.destroy();
-            charts.engagement = new Chart(engagementCtx, {
-                type: 'bar',
-                data: {
-                    labels: topByEngagement.map(a => a.title.substring(0, 20) + '...'),
-                    datasets: [{
-                        label: 'Score',
-                        data: topByEngagement.map(a => a.engagement_score),
-                        backgroundColor: '#10b981',
-                        borderColor: '#059669',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: { y: { beginAtZero: true } }
-                }
-            });
-        }
-
-        function updateAnalysis(data) {
-            // Sentimento
-            const sentiments = data.statistics.sentiment_distribution || {};
-            let sentimentHTML = '';
-            for (let [sentiment, count] of Object.entries(sentiments)) {
-                const emoji = sentiment === 'positive' ? '😊' : sentiment === 'negative' ? '😞' : '😐';
-                sentimentHTML += `
-                    <div class="analysis-item">
-                        <span class="analysis-label">${emoji} ${sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}</span>
-                        <span class="analysis-value">${count} artigos</span>
-                    </div>
-                `;
             }
-            document.getElementById('sentimentAnalysis').innerHTML = sentimentHTML;
-
-            // Top Artigos
-            const topArticles = data.articles
-                .sort((a, b) => b.engagement_score - a.engagement_score)
-                .slice(0, 3);
-
-            let topHTML = '';
-            topArticles.forEach((a, i) => {
-                topHTML += `
-                    <div class="top-article-item">
-                        <div class="top-article-title">${i + 1}. ${a.title.substring(0, 40)}...</div>
-                        <div class="top-article-score">Score: ${a.engagement_score.toFixed(2)}%</div>
-                    </div>
-                `;
-            });
-            document.getElementById('topArticles').innerHTML = topHTML;
-
-            // Estatísticas Gerais
-            let statsHTML = `
-                <div class="analysis-item">
-                    <span class="analysis-label">📰 Total de Artigos</span>
-                    <span class="analysis-value">${data.articles.length}</span>
-                </div>
-                <div class="analysis-item">
-                    <span class="analysis-label">📚 Fontes</span>
-                    <span class="analysis-value">${data.statistics.sources || 0}</span>
-                </div>
-                <div class="analysis-item">
-                    <span class="analysis-label">📂 Categorias</span>
-                    <span class="analysis-value">${data.statistics.categories || 0}</span>
-                </div>
-                <div class="analysis-item">
-                    <span class="analysis-label">💬 Engajamento Médio</span>
-                    <span class="analysis-value">${(data.statistics.avg_engagement || 0).toFixed(1)}%</span>
-                </div>
-            `;
-            document.getElementById('generalStats').innerHTML = statsHTML;
-        }
-
-        function displayArticles(articles) {
-            const filtered = currentFilter === 'all' 
-                ? articles 
-                : articles.filter(a => a.sentiment === currentFilter);
-
-            const container = document.getElementById('articlesContainer');
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="no-data"><p>Nenhum artigo encontrado.</p></div>';
-                return;
-            }
-
-            container.innerHTML = filtered.map((article, index) => `
-                <div class="article-card ${article.sentiment}">
-                    <div class="article-header">
-                        <div class="article-title">${index + 1}. ${article.title}</div>
-                        <span class="article-source">${article.source}</span>
-                    </div>
-                    <a href="${article.url}" target="_blank" class="article-url">${article.url}</a>
-                    <div class="article-meta">
-                        <div class="article-meta-item">📂 ${article.category}</div>
-                        <div class="article-meta-item">👤 ${article.author || 'N/A'}</div>
-                        <div class="article-meta-item">📅 ${article.published_date || 'N/A'}</div>
-                    </div>
-                    ${article.summary ? `<div style="margin-top: 10px; color: #666; font-size: 0.9em;">${article.summary}</div>` : ''}
-                    <div class="engagement-bar">
-                        <div class="engagement-fill" style="width: ${Math.min(article.engagement_score, 100)}%"></div>
-                    </div>
-                    <div style="margin-top: 10px; display: flex; gap: 10px;">
-                        <span class="sentiment-badge sentiment-${article.sentiment}">
-                            ${article.sentiment === 'positive' ? '😊' : article.sentiment === 'negative' ? '😞' : '😐'} ${article.sentiment}
-                        </span>
-                        <span style="color: #667eea; font-weight: bold;">Engajamento: ${article.engagement_score.toFixed(1)}%</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterArticles(sentiment) {
-            currentFilter = sentiment;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            displayArticles(allArticles);
         }
 
         function startScraping() {
-            document.getElementById('startBtn').disabled = true;
+            const startBtn = document.getElementById('startBtn');
+            startBtn.disabled = true;
+
             fetch('/api/start-scraping')
                 .then(response => response.json())
-                .catch(error => console.error('Erro:', error));
+                .then(data => {
+                    console.log('Scraping iniciado:', data);
+                })
+                .catch(error => {
+                    console.error('Erro ao iniciar scraping:', error);
+                    startBtn.disabled = false;
+                });
         }
     </script>
 </body>

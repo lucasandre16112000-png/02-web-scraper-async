@@ -1,6 +1,6 @@
 """
-Servidor Web Profissional com Scraper Integrado
-Executa scraper automaticamente e serve dados via API REST
+Servidor Web Profissional PRO - Dashboard Avançado
+Integração completa com scraper avançado
 """
 
 import http.server
@@ -13,30 +13,24 @@ import webbrowser
 import sys
 from pathlib import Path
 from datetime import datetime
-from scraper import WebScraper
+from scraper_pro import AdvancedWebScraper
 
 PORT = 8000
 HOST = "localhost"
 
-# Variáveis globais para armazenar dados
+# Variáveis globais
 scraping_data = {
     "status": "idle",
     "message": "Pronto para iniciar",
     "progress": 0,
     "articles": [],
-    "statistics": {
-        "total_items": 0,
-        "successful_items": 0,
-        "failed_items": 0,
-        "total_time": 0,
-        "items_per_second": 0,
-        "status": "idle"
-    },
+    "statistics": {},
+    "analysis": {},
     "timestamp": datetime.now().isoformat()
 }
 
-class ScraperHandler(http.server.SimpleHTTPRequestHandler):
-    """Handler customizado para servir arquivos e API"""
+class ScraperProHandler(http.server.SimpleHTTPRequestHandler):
+    """Handler customizado para servidor PRO"""
     
     def do_GET(self):
         """Tratar requisições GET"""
@@ -53,7 +47,6 @@ class ScraperHandler(http.server.SimpleHTTPRequestHandler):
         
         # API: Iniciar scraping
         if self.path == '/api/start-scraping':
-            # Verificar se já está rodando
             if scraping_data["status"] == "scraping":
                 self.send_response(400)
                 self.send_header('Content-type', 'application/json')
@@ -61,8 +54,7 @@ class ScraperHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Scraping já em andamento"}).encode())
                 return
             
-            # Iniciar scraping em thread separada
-            thread = threading.Thread(target=run_scraper)
+            thread = threading.Thread(target=run_scraper_pro)
             thread.daemon = True
             thread.start()
             
@@ -73,15 +65,14 @@ class ScraperHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({"status": "Scraping iniciado"}).encode())
             return
         
-        # Servir dashboard.html por padrão
+        # Servir dashboard por padrão
         if self.path == '/' or self.path == '/dashboard':
-            self.path = '/dashboard.html'
+            self.path = '/dashboard_pro.html'
         
-        # Servir arquivo estático
         return super().do_GET()
     
     def end_headers(self):
-        """Adicionar headers para evitar cache"""
+        """Adicionar headers"""
         self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
         self.send_header('Pragma', 'no-cache')
         self.send_header('Expires', '0')
@@ -91,32 +82,24 @@ class ScraperHandler(http.server.SimpleHTTPRequestHandler):
         """Log customizado"""
         print(f"[{self.log_date_time_string()}] {format % args}")
 
-def run_scraper():
-    """Executar scraper em thread separada"""
+def run_scraper_pro():
+    """Executar scraper PRO"""
     global scraping_data
     
     try:
         scraping_data["status"] = "scraping"
-        scraping_data["message"] = "Iniciando scraper..."
+        scraping_data["message"] = "Iniciando scraper PRO..."
         scraping_data["progress"] = 10
         
-        # URLs padrão
-        urls = [
-            "https://news.ycombinator.com",
-            "https://www.reddit.com/r/programming",
-            "https://www.techcrunch.com"
-        ]
-        
         # Criar scraper
-        scraper = WebScraper(output_dir=".")
+        scraper = AdvancedWebScraper(output_dir=".")
         
-        # Executar scraper
         print("\n" + "="*80)
-        print("🕷️  INICIANDO SCRAPER AUTOMÁTICO")
+        print("🚀 SCRAPER PRO - VERSÃO AVANÇADA")
         print("="*80 + "\n")
         
         scraping_data["progress"] = 30
-        scraping_data["message"] = "Fazendo requisições..."
+        scraping_data["message"] = "Coletando dados de múltiplas fontes..."
         
         # Rodar asyncio
         if sys.platform == 'win32':
@@ -126,16 +109,16 @@ def run_scraper():
         asyncio.set_event_loop(loop)
         
         try:
-            loop.run_until_complete(scraper.scrape_articles(urls))
+            articles = loop.run_until_complete(scraper.scrape_articles())
         finally:
             loop.close()
         
         scraping_data["progress"] = 80
-        scraping_data["message"] = "Processando resultados..."
+        scraping_data["message"] = "Processando análises avançadas..."
         
         # Carregar resultados
-        if os.path.exists("scraping_results.json"):
-            with open("scraping_results.json", "r", encoding="utf-8") as f:
+        if os.path.exists("scraping_results_pro.json"):
+            with open("scraping_results_pro.json", "r", encoding="utf-8") as f:
                 results = json.load(f)
                 scraping_data["articles"] = results.get("articles", [])
                 scraping_data["statistics"] = results.get("statistics", {})
@@ -143,27 +126,26 @@ def run_scraper():
         
         scraping_data["progress"] = 100
         scraping_data["status"] = "completed"
-        scraping_data["message"] = "✅ Scraping concluído com sucesso!"
+        scraping_data["message"] = "✅ Scraper PRO concluído com sucesso!"
         
         print("\n" + "="*80)
-        print("✅ SCRAPER CONCLUÍDO COM SUCESSO!")
+        print("✅ SCRAPER PRO CONCLUÍDO!")
         print("="*80 + "\n")
         
     except Exception as e:
         scraping_data["status"] = "error"
         scraping_data["message"] = f"❌ Erro: {str(e)}"
         scraping_data["progress"] = 0
-        print(f"\n❌ Erro no scraper: {e}\n")
+        print(f"\n❌ Erro: {e}\n")
 
-def start_server():
-    """Iniciar o servidor web"""
+def start_server_pro():
+    """Iniciar servidor PRO"""
     
-    # Mudar para o diretório do script
     script_dir = Path(__file__).parent
     os.chdir(script_dir)
     
     print("\n" + "="*80)
-    print("🌐 SERVIDOR WEB PROFISSIONAL - PORTFÓLIO")
+    print("🌐 SERVIDOR WEB PROFISSIONAL PRO - PORTFÓLIO AVANÇADO")
     print("="*80)
     print()
     print(f"✅ Servidor iniciado em: http://{HOST}:{PORT}")
@@ -176,22 +158,18 @@ def start_server():
     print()
     print("="*80 + "\n")
     
-    # Criar socket server
-    with socketserver.TCPServer(("", PORT), ScraperHandler) as httpd:
-        # Abrir no navegador
+    with socketserver.TCPServer(("", PORT), ScraperProHandler) as httpd:
         try:
             webbrowser.open(f"http://{HOST}:{PORT}/")
         except Exception as e:
-            print(f"⚠️  Não foi possível abrir o navegador automaticamente: {e}")
+            print(f"⚠️  Não foi possível abrir o navegador: {e}")
             print(f"Abra manualmente: http://{HOST}:{PORT}/")
         
-        # Iniciar scraper automaticamente
-        print("\n🕷️  Iniciando scraper automaticamente...\n")
-        thread = threading.Thread(target=run_scraper)
+        print("\n🕷️  Iniciando scraper PRO automaticamente...\n")
+        thread = threading.Thread(target=run_scraper_pro)
         thread.daemon = True
         thread.start()
         
-        # Servir
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
@@ -199,4 +177,4 @@ def start_server():
             sys.exit(0)
 
 if __name__ == "__main__":
-    start_server()
+    start_server_pro()
