@@ -154,10 +154,11 @@ def start_server_pro():
     
     with socketserver.TCPServer(("", PORT), ScraperProHandler) as httpd:
         try:
-            webbrowser.open(f"http://{HOST}:{PORT}/")
+            # Não abrir navegador automaticamente - deixar para o launcher
+            # webbrowser.open(f"http://{HOST}:{PORT}/")
+            pass
         except Exception as e:
-            print(f"⚠️  Não foi possível abrir o navegador: {e}")
-            print(f"Abra manualmente: http://{HOST}:{PORT}/")
+            pass
         
         print("\n✅ Servidor rodando! Clique no botão no dashboard para iniciar o scraper!\n")
         

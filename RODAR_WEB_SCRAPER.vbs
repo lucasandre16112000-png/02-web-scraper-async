@@ -21,5 +21,5 @@ Else
     objShell.Run strCloneCmd, 0, False
 End If
 
-' Aguardar um pouco
-WScript.Sleep(1000)
+' Aguardar mais tempo para evitar duplicacao
+WScript.Sleep(8000)
