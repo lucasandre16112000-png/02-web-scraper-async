@@ -1,205 +1,234 @@
-# 🕷️ Web Scraper PRO - Dashboard Profissional
+# 🕷️ Web Scraper PRO - Professional Dashboard
 
-Um web scraper assíncrono profissional com dashboard interativo, rotação de 30+ fontes, análises avançadas e interface visual moderna. Construído com Python, `asyncio` e `aiohttp`.
+A professional asynchronous web scraper with interactive dashboard, rotation of 30+ sources, advanced analytics, and modern visual interface. Built with Python, `asyncio`, and `aiohttp`.
 
-**✅ 100% Compatível com Windows, macOS e Linux**
-
----
-
-## ✨ Funcionalidades Principais
-
-- **🚀 Processamento Assíncrono**: Múltiplas requisições HTTP em paralelo com `asyncio` e `aiohttp`
-- **🔄 Rotação de 30+ Fontes**: Sempre coleta dados de diferentes sites
-- **📊 Dashboard Interativo**: Interface visual profissional com gráficos em tempo real
-- **🎯 Análises Avançadas**: Sentimento, engajamento, categorização inteligente
-- **⚡ Rate Limiting Inteligente**: Controla requisições sem sobrecarregar servidores
-- **🔁 Retry Automático**: Exponential backoff para requisições que falham
-- **✅ Validação de URLs**: Valida antes de fazer requisições
-- **📝 Logging Detalhado**: Feedback em tempo real do progresso
-- **📁 Exportação JSON**: Salva dados estruturados automaticamente
-- **🖥️ Compatibilidade Multiplataforma**: Windows, macOS e Linux
+**✅ 100% Compatible with Windows, macOS, and Linux**
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## ✨ Key Features
 
-| Tecnologia | Versão | Propósito |
-|:---|:---|:---|
-| **Python** | 3.8+ | Linguagem principal |
-| **aiohttp** | 3.9.1 | Cliente/Servidor HTTP assíncrono |
-| **BeautifulSoup4** | 4.12.2 | Parsing de HTML e XML |
-| **lxml** | 4.9.3 | Parser XML/HTML de alta performance |
-| **python-dotenv** | 1.0.0 | Gerenciamento de variáveis de ambiente |
+- **🚀 Asynchronous Processing**: Multiple HTTP requests in parallel with `asyncio` and `aiohttp`
+- **🔄 Rotation of 30+ Sources**: Always collects data from different websites
+- **📊 Interactive Dashboard**: Professional visual interface with real-time graphs
+- **🎯 Advanced Analytics**: Sentiment analysis, engagement scoring, intelligent categorization
+- **⚡ Smart Rate Limiting**: Controls requests without overloading servers
+- **🔁 Automatic Retry**: Exponential backoff for failed requests
+- **✅ URL Validation**: Validates before making requests
+- **📝 Detailed Logging**: Real-time progress feedback
+- **📁 JSON Export**: Automatically saves structured data
+- **🖥️ Cross-Platform**: Works on Windows, macOS, and Linux
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🛠️ Required Programs to Download
+
+Before you start, you need to download and install these two programs:
+
+### 1. **Git** (Required to clone the project)
+- **Download**: https://git-scm.com/downloads
+- **Why**: To download the project from GitHub
+- **Installation**: Download and run the installer, click "Next" on all screens
+
+### 2. **Python** (Required to run the scraper)
+- **Download**: https://www.python.org/downloads/
+- **Version**: Python 3.8 or higher (recommended: Python 3.10+)
+- **Installation**: 
+  - Download and run the installer
+  - **IMPORTANT**: Check the box that says **"Add Python to PATH"** ✅
+  - Click "Install Now"
+  - Wait for installation to complete
+
+---
+
+## 📂 Project Structure
 
 ```
 /02-web-scraper-async
-├── scraper_pro_v4.py           # Scraper principal (versão final)
-├── server_pro_v4.py            # Servidor web com dashboard
-├── dashboard_pro.html          # Interface visual profissional
-├── RODAR_WEB_SCRAPER.vbs       # Launcher Windows (recomendado)
-├── RODAR_WEB_SCRAPER.bat       # Launcher Windows (backup)
-├── requirements.txt            # Dependências do projeto
-├── README.md                   # Este arquivo
-├── DASHBOARD.md                # Guia do dashboard
-└── LEIA-ME-CLIENTE.txt         # Instruções para clientes
+├── scraper_pro_v4.py           # Main scraper (final version)
+├── server_pro_v4.py            # Web server with dashboard
+├── dashboard_pro.html          # Professional visual interface
+├── RODAR_WEB_SCRAPER.vbs       # Windows launcher (recommended)
+├── RODAR_WEB_SCRAPER.bat       # Windows launcher (backup)
+├── requirements.txt            # Python dependencies
+├── README.md                   # This file
+├── DASHBOARD.md                # Dashboard guide
+└── LEIA-ME-CLIENTE.txt         # Client instructions
 ```
 
 ---
 
-## 📋 Guia de Instalação e Execução
+## 🚀 Quick Start Guide (RECOMMENDED)
 
-### Pré-requisitos
+### Windows - Click 2 Times (Easiest)
 
-1. **Git**: Ferramenta para clonar o repositório
-   - [**Download do Git aqui**](https://git-scm.com/downloads)
-
-2. **Python**: Versão 3.8 ou superior
-   - [**Download do Python aqui**](https://www.python.org/downloads/)
-   - **Importante (Windows)**: Marque **"Add Python to PATH"** durante instalação
+1. **Download and Install Git**: https://git-scm.com/downloads
+2. **Download and Install Python**: https://www.python.org/downloads/
+   - ⚠️ Check "Add Python to PATH" during installation
+3. **Open PowerShell** in the project folder
+4. **Run**:
+   ```powershell
+   git clone https://github.com/lucasandre16112000-png/02-web-scraper-async.git
+   cd 02-web-scraper-async
+   ```
+5. **Double-click** `RODAR_WEB_SCRAPER.vbs`
+6. **Wait** for the browser to open
+7. **Click** "🚀 Start Scraping PRO"
+8. **Done!** Dashboard shows data in real-time
 
 ---
 
-## 🚀 Instalação e Execução Rápida (RECOMENDADO)
+## 📋 Step-by-Step Installation Guide
 
-### Windows - Clique 2 Vezes (Mais Fácil)
+### Step 1: Download Required Programs
 
-1. Clique 2 vezes em `RODAR_WEB_SCRAPER.vbs`
-2. Aguarde o navegador abrir
-3. Clique em "🚀 Iniciar Scraping PRO"
-4. Pronto! Dashboard mostra dados em tempo real
+#### For Windows:
+1. Download Git: https://git-scm.com/downloads
+2. Download Python: https://www.python.org/downloads/
+3. Run both installers and follow the default options
 
-### Windows - PowerShell
+#### For macOS:
+1. Download Git: https://git-scm.com/downloads
+2. Download Python: https://www.python.org/downloads/
+3. Or use Homebrew:
+   ```bash
+   brew install git python3
+   ```
 
-```powershell
-git clone https://github.com/lucasandre16112000-png/02-web-scraper-async.git
-cd 02-web-scraper-async
-python -m venv venv
-.\venv\Scripts\activate
-pip install -r requirements.txt
-python server_pro_v4.py
+#### For Linux (Ubuntu/Debian):
+```bash
+sudo apt-get update
+sudo apt-get install git python3 python3-pip python3-venv
 ```
 
-### Linux/macOS - Terminal
+---
+
+### Step 2: Clone the Project
+
+Open **PowerShell** (Windows) or **Terminal** (macOS/Linux) and run:
 
 ```bash
 git clone https://github.com/lucasandre16112000-png/02-web-scraper-async.git
 cd 02-web-scraper-async
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python3 server_pro_v4.py
 ```
 
 ---
 
-## 📊 Como Usar o Dashboard
+### Step 3: Create Virtual Environment
 
-### Passo 1: Iniciar o Servidor
+A virtual environment isolates project dependencies from your system.
+
+**Windows (PowerShell):**
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+```
+
+**Windows (Command Prompt):**
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+**macOS/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+✅ You'll see `(venv)` at the start of your terminal line when activated.
+
+---
+
+### Step 4: Install Dependencies
+
+With the virtual environment activated, run:
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs all required Python libraries.
+
+---
+
+### Step 5: Run the Dashboard Server
+
+**Windows:**
 ```powershell
 python server_pro_v4.py
 ```
 
-### Passo 2: Abrir Dashboard
-- Navegador abre automaticamente em `http://localhost:8000`
-- Ou acesse manualmente: `http://localhost:8000`
-
-### Passo 3: Iniciar Scraping
-- Clique no botão **"🚀 Iniciar Scraping PRO"**
-- Dashboard mostra progresso em tempo real
-- Gráficos e estatísticas atualizam automaticamente
-
-### Passo 4: Visualizar Dados
-- **Estatísticas**: Total de artigos, fontes, categorias
-- **Gráficos**: Distribuição de sentimento, artigos por fonte
-- **Análises**: Score de engajamento, top artigos
-- **Lista**: Todos os artigos com detalhes completos
-
----
-
-## 🎯 Exemplos de Uso
-
-### Exemplo 1: Rodar Scraper Diretamente (Python)
-
-```python
-import asyncio
-from scraper_pro_v4 import WebScraperPro
-
-async def main():
-    scraper = WebScraperPro()
-    results = await scraper.scrape()
-    print(f"✅ {len(results)} artigos coletados!")
-
-asyncio.run(main())
+**macOS/Linux:**
+```bash
+python3 server_pro_v4.py
 ```
 
-### Exemplo 2: Usar com URLs Customizadas
-
-```python
-import asyncio
-from scraper_pro_v4 import WebScraperPro
-
-async def main():
-    scraper = WebScraperPro()
-    # Customizar fontes
-    scraper.sources = [
-        "https://seu-site-1.com",
-        "https://seu-site-2.com"
-    ]
-    results = await scraper.scrape()
-
-asyncio.run(main())
+You should see:
+```
+================================================================================
+🌐 PROFESSIONAL WEB SERVER PRO V4 - SITE ROTATION
+================================================================================
+✅ Server started at: http://localhost:8000
+🌍 Opening in browser...
+⏹️  Press CTRL+C to stop the server
+================================================================================
 ```
 
 ---
 
-## ⚙️ Configuração Avançada
+### Step 6: Use the Dashboard
 
-### Parâmetros do WebScraperPro
-
-```python
-scraper = WebScraperPro(
-    requests_per_second=2.0,  # Taxa de requisições
-    timeout=10,                # Timeout em segundos
-    max_retries=3              # Máximo de tentativas
-)
-```
-
-### Variáveis de Ambiente
-
-Crie um arquivo `.env`:
-
-```
-REQUESTS_PER_SECOND=2.0
-TIMEOUT=10
-MAX_RETRIES=3
-LOG_LEVEL=INFO
-```
+1. **Browser opens automatically** at `http://localhost:8000`
+2. **Click** the button "🚀 Start Scraping PRO"
+3. **Watch** the progress bar and real-time updates
+4. **See** graphs and statistics appear automatically
+5. **Explore** the list of 50+ collected articles
 
 ---
 
-## 📊 Dados Coletados
+## 🎯 Using the Dashboard
 
-Cada artigo contém:
-- ✅ Título
+### What You'll See
+
+- **Status Section**: Real-time progress of the scraper
+- **Statistics Cards**: Total articles, sources, categories, engagement
+- **Graphs**: 
+  - Sentiment distribution (pie chart)
+  - Articles per source (bar chart)
+  - Articles per category (pie chart)
+  - Top articles by engagement (bar chart)
+- **Article List**: All collected articles with details
+
+### How to Interact
+
+1. **Start Scraping**: Click "🚀 Start Scraping PRO" button
+2. **Watch Progress**: See the progress bar update in real-time
+3. **View Results**: Graphs and statistics update automatically
+4. **Scroll Down**: See the complete list of articles
+5. **Stop Server**: Press `CTRL+C` in the terminal to stop
+
+---
+
+## 📊 Data Collected
+
+Each article contains:
+- ✅ Title
 - ✅ URL
-- ✅ Autor
-- ✅ Data de publicação
-- ✅ Resumo
-- ✅ Conteúdo completo
-- ✅ Categoria (12 tipos)
+- ✅ Author
+- ✅ Publication date
+- ✅ Summary
+- ✅ Full content
+- ✅ Category (12 types)
 - ✅ Tags
-- ✅ Views, Likes, Comentários
-- ✅ Score de engajamento
-- ✅ Análise de sentimento
-- ✅ Palavras-chave
+- ✅ Views, Likes, Comments
+- ✅ Engagement score
+- ✅ Sentiment analysis
+- ✅ Keywords
 
 ---
 
-## 📡 30+ Fontes Disponíveis
+## 📡 30+ Data Sources
 
 **Tech News:**
 Hacker News, TechCrunch, The Verge, Wired, Ars Technica, AnandTech
@@ -227,50 +256,73 @@ Codepen, Codesignal
 
 ---
 
-## 🤔 Solução de Problemas Comuns
+## 🛠️ Technologies Used
 
-### Problema: "ModuleNotFoundError: No module named 'aiohttp'"
-
-**Solução**: 
-1. Certifique-se que o ambiente virtual está ativado: `(venv)` deve aparecer no terminal
-2. Execute: `pip install -r requirements.txt`
-
-### Problema: "Erros de Conexão ou Timeout"
-
-**Solução**: 
-- Verifique sua conexão de internet
-- Tente aumentar o `timeout` em `server_pro_v4.py`
-- Reduza `requests_per_second`
-
-### Problema: "Dashboard não abre no navegador"
-
-**Solução**:
-- Verifique se o servidor está rodando (deve mostrar "Servidor rodando em http://localhost:8000")
-- Acesse manualmente: `http://localhost:8000`
-- Verifique se a porta 8000 não está em uso
-
-### Problema: "Python não reconhecido no Windows"
-
-**Solução**:
-1. Reinstale Python marcando **"Add Python to PATH"**
-2. Reinicie o computador
-3. Abra um novo terminal e tente novamente
+| Technology | Version | Purpose |
+|:---|:---|:---|
+| **Python** | 3.8+ | Main language |
+| **aiohttp** | 3.9.1 | Asynchronous HTTP client/server |
+| **BeautifulSoup4** | 4.12.2 | HTML/XML parsing |
+| **lxml** | 4.9.3 | High-performance XML/HTML parser |
+| **python-dotenv** | 1.0.0 | Environment variable management |
 
 ---
 
-## 📊 Formato do Arquivo JSON de Saída
+## 🤔 Troubleshooting
+
+### Problem: "Python is not recognized"
+
+**Solution**:
+1. Reinstall Python from https://www.python.org/downloads/
+2. **Important**: Check "Add Python to PATH" during installation
+3. Restart your computer
+4. Open a new terminal and try again
+
+### Problem: "ModuleNotFoundError: No module named 'aiohttp'"
+
+**Solution**:
+1. Make sure the virtual environment is activated (you should see `(venv)` in the terminal)
+2. Run: `pip install -r requirements.txt`
+
+### Problem: "Git is not recognized"
+
+**Solution**:
+1. Download and install Git from https://git-scm.com/downloads
+2. Restart your computer
+3. Open a new terminal and try again
+
+### Problem: "Dashboard won't open in browser"
+
+**Solution**:
+1. Check that the server is running (should show "Server started at http://localhost:8000")
+2. Manually open your browser and go to: `http://localhost:8000`
+3. Make sure port 8000 is not in use by another program
+
+### Problem: "Connection refused" or "ERR_CONNECTION_REFUSED"
+
+**Solution**:
+1. Make sure the server is running: `python server_pro_v4.py`
+2. Wait a few seconds for the server to start
+3. Refresh the browser page
+4. If the problem persists, restart the server
+
+---
+
+## 📁 Output Format (JSON)
+
+The scraper saves results to `scraping_results_pro.json`:
 
 ```json
 {
   "timestamp": "2026-02-03T20:00:00.000000",
   "articles": [
     {
-      "title": "Exemplo de Artigo",
-      "url": "https://exemplo.com",
+      "title": "Example Article",
+      "url": "https://example.com",
       "author": "John Doe",
       "published_date": "2026-02-03",
-      "summary": "Resumo do artigo...",
-      "content": "Conteúdo completo...",
+      "summary": "Article summary...",
+      "content": "Full content...",
       "category": "AI/ML",
       "tags": ["ai", "machine-learning"],
       "views": 1000,
@@ -295,57 +347,86 @@ Codepen, Codesignal
 
 ---
 
-## 🔒 Boas Práticas e Ética
+## 🔒 Best Practices & Ethics
 
-- **Respeite o robots.txt**: Verifique antes de fazer scraping
-- **Use Rate Limiting**: Não sobrecarregue os servidores
-- **Verifique Termos de Serviço**: Tenha permissão para fazer scraping
-- **Identifique-se**: Use User-Agent apropriado (automático)
-- **Não Armazene Dados Pessoais**: Tenha cuidado com informações sensíveis
-
----
-
-## 🔄 Versão Atual (v4.0)
-
-- ✅ Rotação de 30+ fontes
-- ✅ Dashboard profissional interativo
-- ✅ Análises avançadas (sentimento, engajamento)
-- ✅ Categorização inteligente (12 categorias)
-- ✅ Extração completa de dados
-- ✅ Compatibilidade 100% Windows
-- ✅ Launcher automático (.vbs)
-- ✅ Interface visual moderna
+- **Respect robots.txt**: Check before scraping
+- **Use Rate Limiting**: Don't overload servers
+- **Check Terms of Service**: Make sure you have permission
+- **Identify Yourself**: Use appropriate User-Agent (automatic)
+- **Don't Store Personal Data**: Be careful with sensitive information
 
 ---
 
-## 👨‍💻 Autor
+## 📝 Advanced Configuration
+
+### Custom Environment Variables
+
+Create a `.env` file:
+
+```
+REQUESTS_PER_SECOND=2.0
+TIMEOUT=10
+MAX_RETRIES=3
+LOG_LEVEL=INFO
+```
+
+### Using the Scraper in Your Code
+
+```python
+import asyncio
+from scraper_pro_v4 import WebScraperPro
+
+async def main():
+    scraper = WebScraperPro()
+    results = await scraper.scrape()
+    print(f"✅ {len(results)} articles collected!")
+
+asyncio.run(main())
+```
+
+---
+
+## 🔄 Current Version (v4.0)
+
+- ✅ Rotation of 30+ sources
+- ✅ Professional interactive dashboard
+- ✅ Advanced analytics (sentiment, engagement)
+- ✅ Intelligent categorization (12 categories)
+- ✅ Complete data extraction
+- ✅ 100% Windows compatibility
+- ✅ Automatic launcher (.vbs)
+- ✅ Modern visual interface
+
+---
+
+## 👨‍💻 Author
 
 Lucas André S - [GitHub](https://github.com/lucasandre16112000-png)
 
 ---
 
-## 📝 Licença
+## 📝 License
 
-MIT License - Veja LICENSE para detalhes
-
----
-
-## 🤝 Contribuições
-
-Contribuições são bem-vindas! Sinta-se livre para:
-- Reportar bugs
-- Sugerir novas funcionalidades
-- Fazer pull requests
+MIT License - See LICENSE file for details
 
 ---
 
-## 📞 Suporte
+## 🤝 Contributing
 
-Se encontrar problemas:
-1. Verifique a seção "Solução de Problemas Comuns"
-2. Verifique os logs em `logs/scraper.log`
-3. Abra uma issue no GitHub
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest new features
+- Submit pull requests
 
 ---
 
-**Pronto para começar? Execute `python RODAR_WEB_SCRAPER.vbs` no Windows ou `python server_pro_v4.py` em Linux/macOS!** 🚀
+## 📞 Support
+
+If you encounter issues:
+1. Check the "Troubleshooting" section above
+2. Check logs in `logs/scraper.log`
+3. Open an issue on GitHub
+
+---
+
+**Ready to start? Run `python server_pro_v4.py` and open http://localhost:8000 in your browser!** 🚀
